@@ -12,7 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class sigcController extends AbstractActionController
+class GerenciarController extends AbstractActionController
 {
    private $dominio;
    
@@ -30,6 +30,7 @@ class sigcController extends AbstractActionController
     public function painelAction()
     {
         return new ViewModel();
+         
     }
     
     

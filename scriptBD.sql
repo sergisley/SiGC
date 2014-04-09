@@ -302,11 +302,9 @@ CREATE TABLE IF NOT EXISTS `sigc_db`.`historico` (
   `datahora` DATETIME NULL DEFAULT NULL,
   `chamado_id` INT(11) NOT NULL,
   `usuario_id` INT(11) NOT NULL,
-  `equipamento_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_historico_chamado1_idx` (`chamado_id` ASC),
   INDEX `fk_historico_usuario1_idx` (`usuario_id` ASC),
-  INDEX `fk_historico_equipamento1_idx` (`equipamento_id` ASC),
   CONSTRAINT `fk_historico_chamado1`
     FOREIGN KEY (`chamado_id`)
     REFERENCES `sigc_db`.`chamado` (`id`)
@@ -315,11 +313,6 @@ CREATE TABLE IF NOT EXISTS `sigc_db`.`historico` (
   CONSTRAINT `fk_historico_usuario1`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `sigc_db`.`usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_historico_equipamento1`
-    FOREIGN KEY (`equipamento_id`)
-    REFERENCES `sigc_db`.`equipamento` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

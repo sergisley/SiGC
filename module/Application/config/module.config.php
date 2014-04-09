@@ -37,7 +37,7 @@ return array(
                 'options' => array(
                     'route' => '/gerenciar',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\gerenciar',
+                        'controller' => 'Application\Controller\Gerenciar',
                         'action' => 'index',
                     ),
                 ),
@@ -108,7 +108,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\gerenciar' => 'Application\Controller\gerenciarController',
+            'Application\Controller\Gerenciar' => 'Application\Controller\GerenciarController',
         ),
     ),
     'view_manager' => array(
