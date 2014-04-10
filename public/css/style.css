@@ -1,7 +1,30 @@
 body {
     padding-top: 60px;
     padding-bottom: 40px;
+    background-color: #333333;
 }
+
+.multiCorHR{
+    
+border: none;
+border-top:2px solid #03899c; 
+//background-color:  2px solid #162eae; 
+border-bottom: 2px solid #14d100; 
+}
+
+.divCard{
+    
+    padding-right: 15px;
+padding-left: 15px;
+margin-right: auto;
+margin-left: auto;
+    
+    
+ background-color: #eee;
+
+ border-radius:3px;  
+}
+
 
 .zf-green {
     color: #68b604;

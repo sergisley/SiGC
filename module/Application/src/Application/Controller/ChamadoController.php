@@ -12,7 +12,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class GerenciarController extends AbstractActionController
+class ChamadoController extends AbstractActionController
 {
    private $dominio;
    
@@ -21,19 +21,13 @@ class GerenciarController extends AbstractActionController
        $this->dominio = "http://localhost:8000/"; 
    }
     
-   
-   
-    public function painelAction()
+     public function listarchamadosAction()
     {
         return new ViewModel();
-         
     }
+     
+   
     
-     public function formulariousuarioAction()
-    {
-        return new ViewModel();
-         
-    }
     
     
     

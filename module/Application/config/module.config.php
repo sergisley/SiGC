@@ -52,6 +52,46 @@ return array(
                             )
                         )
                     ),
+                    'formulariousuario' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/formulariousuario',
+                            'defaults' => array(
+                                'action' => 'formulariousuario'
+                            )
+                        )
+                    ),
+                ),
+            ),
+                        'chamado' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/chamado',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Chamado',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'listarchamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/listarchamados',
+                            'defaults' => array(
+                                'action' => 'listarchamados'
+                            )
+                        )
+                    ),
+                    'xxxxxx' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/xxxxxx',
+                            'defaults' => array(
+                                'action' => 'xxxxx'
+                            )
+                        )
+                    ),
                 ),
             ),
             // The following is a route to simplify getting started creating
@@ -109,6 +149,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Gerenciar' => 'Application\Controller\GerenciarController',
+            'Application\Controller\Chamado' => 'Application\Controller\ChamadoController',
         ),
     ),
     'view_manager' => array(

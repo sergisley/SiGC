@@ -31,8 +31,8 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin: 0px">
+            <div class="navbar-inner" style="margin-left: 5px; margin-right: 20px">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img style="width: 25px;height: 25px" src="<?php echo $this->basePath('img/sigc-logo.png') ?>" alt="SiGC"/>
                         &nbsp;&nbsp;SiGC&nbsp;&nbsp;
@@ -153,39 +153,66 @@
              
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <b>
+                                    <span class="glyphicon glyphicon-lock"></span> 
+                                    'nome do cabloco'
+                                </b>
+                            </a>
                             <ul class="dropdown-menu">
                                 <li>                                    
                                     <a href="#">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>                            
-                                            &nbsp; Minha Conta
+                                            &nbsp; Perfil
                                         </b>
                                     </a>                                  
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-
                                     <a href="#">
                                         <b>
                                             <span class="glyphicon glyphicon-log-out"></span>
                                             &nbsp; Deslogar
                                         </b>
                                     </a>
-
                                 </li>                
                             </ul>
-                        </li>                              
-
+                        </li>
                     </ul>                    
                 </div>
             </div>
+            <div class="row" style="margin: 0px; padding: opx;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #03899c; margin: 0px; border-top-width: 3px;" width="100%">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #162eae; margin: 0px; border-top-width: 3px;">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #14d100; margin: 0px; border-top-width: 3px;">
+                </div>
+            </div>
         </nav>
-        <div class="container">
+        <br>
+       
+        <div class="container divCard">
             <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p></p>
+            <br>
+            
+            <div class="row" style="margin: 0px; padding: opx;">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #03899c; margin: 0px; border-top-width: 2px;" width="100%">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #162eae; margin: 0px; border-top-width: 2px;">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
+                    <hr style="border-top-color: #14d100; margin: 0px; border-top-width: 2px;">
+                </div>
+            </div>
+          <footer>
+                <p>Trabalho de Projeto Aplicado 5º Semestre 2014/1 Grupo 4 (ou 5) UNA</p>
             </footer>
         </div> <!-- /container -->
      
