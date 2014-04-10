@@ -52,12 +52,43 @@ return array(
                             )
                         )
                     ),
-                    'formulariousuario' => array(
+                    'auditoria' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/formulariousuario',
+                            'route' => '/auditoria',
                             'defaults' => array(
-                                'action' => 'formulariousuario'
+                                'action' => 'auditoria'
+                            )
+                        )
+                    ),
+                ),
+            ),
+                        'usuario' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/usuario',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Usuario',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'listarusuarios' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/listarusuarios',
+                            'defaults' => array(
+                                'action' => 'listarusuarios'
+                            )
+                        )
+                    ),
+                    'xxxxxxxxx' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/xxxxxxxx',
+                            'defaults' => array(
+                                'action' => 'xxxxxxxx'
                             )
                         )
                     ),
@@ -150,6 +181,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Gerenciar' => 'Application\Controller\GerenciarController',
             'Application\Controller\Chamado' => 'Application\Controller\ChamadoController',
+            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     'view_manager' => array(
