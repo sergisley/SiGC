@@ -25,11 +25,17 @@ class ChamadoController extends AbstractActionController
     {
         return new ViewModel();
     }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     public function listarchamadosAction()
     {
+        
+        
+        
+        
         return new ViewModel();
         
     }
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
      public function chamadosabertosAction()
     {
         return new ViewModel();
