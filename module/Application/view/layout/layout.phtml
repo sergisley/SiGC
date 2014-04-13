@@ -56,7 +56,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('chamado/criarchamado') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-plus-sign"></span>
                                             &nbsp;  Criar
@@ -65,7 +65,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('chamado/listarchamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Meus Chamados
@@ -74,7 +74,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('chamado/chamadosabertos') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-open"></span>
                                             &nbsp;    Em aberto
@@ -83,7 +83,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('chamado/pesquisar') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-search"></span>
                                             &nbsp;   Pesquisar
@@ -103,7 +103,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('gerenciar/painel') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>
                                             &nbsp;  Usuários
@@ -112,7 +112,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('gerenciar/auditoria') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-hdd"></span>
                                             &nbsp;   Equipamentos
@@ -121,7 +121,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('gerenciar/catequipamentos') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-print"></span>
                                             &nbsp;    Categorias de Equipamentos
@@ -130,7 +130,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <a href="<?php echo $this->url('gerenciar/catchamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Categorias de Chamado
@@ -156,12 +156,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <b>
                                     <span class="glyphicon glyphicon-lock"></span> 
-                                    'nome do cabloco'
+                                    'Usuario Logado'
                                 </b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>                                    
-                                    <a href="#">
+                                     <a href="<?php echo $this->url('usuario/listarusuarios') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>                            
                                             &nbsp; Perfil
