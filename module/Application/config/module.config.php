@@ -61,6 +61,24 @@ return array(
                             )
                         )
                     ),
+                     'catequipamentos' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/catequipamentos',
+                            'defaults' => array(
+                                'action' => 'catequipamentos'
+                            )
+                        )
+                    ),
+                     'catchamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/catchamados',
+                            'defaults' => array(
+                                'action' => 'catchamados'
+                            )
+                        )
+                    ),
                 ),
             ),
                         'usuario' => array(
@@ -105,6 +123,15 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'criarchamado' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/criarchamado',
+                            'defaults' => array(
+                                'action' => 'criarchamado'
+                            )
+                        )
+                    ),
                     'listarchamados' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -114,12 +141,21 @@ return array(
                             )
                         )
                     ),
-                    'xxxxxx' => array(
+                    'chamadosabertos' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/xxxxxx',
+                            'route' => '/chamadosabertos',
                             'defaults' => array(
-                                'action' => 'xxxxx'
+                                'action' => 'chamadosabertos'
+                            )
+                        )
+                    ),
+                    'pesquisar' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/pesquisar',
+                            'defaults' => array(
+                                'action' => 'pesquisar'
                             )
                         )
                     ),

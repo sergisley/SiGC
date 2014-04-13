@@ -34,8 +34,16 @@ class GerenciarController extends AbstractActionController
         return new ViewModel();
          
     }
-    
-    
+    public function catequipamentosAction()
+    {
+        return new ViewModel();
+         
+    }
+    public function catchamadosAction()
+    {
+        return new ViewModel();
+         
+    }
     
     
     
