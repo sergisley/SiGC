@@ -10,6 +10,8 @@
 return array(
     'router' => array(
         'routes' => array(
+            
+            #rota literal para a home
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -21,6 +23,7 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    #rota literal para a view contatos
                     'contatos' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -32,26 +35,18 @@ return array(
                     ),
                 ),
             ),
+            #rota literal para o controller gerenciar
             'gerenciar' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/gerenciar',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Gerenciar',
-                        'action' => 'index',
+                        'action' => 'painel',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'painel' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/painel',
-                            'defaults' => array(
-                                'action' => 'painel'
-                            )
-                        )
-                    ),
                     'auditoria' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -81,26 +76,20 @@ return array(
                     ),
                 ),
             ),
+            
+            #rota para o controller usuario
                         'usuario' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/usuario',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Usuario',
-                        'action' => 'index',
+                        'controller' => 'Application\Controller\usuario',
+                        'action' => 'listarusuarios',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'listarusuarios' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/listarusuarios',
-                            'defaults' => array(
-                                'action' => 'listarusuarios'
-                            )
-                        )
-                    ),
+                    #rota literal para action de EXEMPLO
                     'xxxxxxxxx' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -112,13 +101,15 @@ return array(
                     ),
                 ),
             ),
+            
+            #rota literal para o controller chamados 
                         'chamado' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/chamado',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Chamado',
-                        'action' => 'index',
+                        'action' => 'listarchamados',
                     ),
                 ),
                 'may_terminate' => true,
@@ -129,15 +120,6 @@ return array(
                             'route' => '/criarchamado',
                             'defaults' => array(
                                 'action' => 'criarchamado'
-                            )
-                        )
-                    ),
-                    'listarchamados' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/listarchamados',
-                            'defaults' => array(
-                                'action' => 'listarchamados'
                             )
                         )
                     ),
@@ -160,12 +142,18 @@ return array(
                         )
                     ),
                 ),
-            ),
+            ), 
+            
+            
+            
+            
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'application' => array(
+            
+            #rota segment para controller chamados
+      /*      'application' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route' => '/application',
@@ -190,7 +178,7 @@ return array(
                         ),
                     ),
                 ),
-            ),
+            ), */
         ),
     ),
     'service_manager' => array(
