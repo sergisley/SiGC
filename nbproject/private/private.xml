@@ -3,6 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp/www/SiGC/config/autoload/local.php.dist</file>
+            <file>file:/C:/wamp/www/SiGC/config/autoload/zendevelopertools.db.local.php</file>
+            <file>file:/C:/wamp/www/SiGC/config/autoload/zenddevelopertools.local.php.dist</file>
+            <file>file:/C:/wamp/www/SiGC/config/autoload/README.md</file>
+            <file>file:/C:/wamp/www/SiGC/config/autoload/global.php</file>
+            <file>file:/C:/wamp/www/SiGC/vendor/zendframework/zendframework/library/Zend/ModuleManager/ModuleManager.php</file>
+            <file>file:/C:/wamp/www/SiGC/config/application.config.php</file>
             <file>file:/C:/wamp/www/SiGC/module/Application/view/layout/layout.phtml</file>
             <file>file:/C:/wamp/www/SiGC/module/Application/view/application/index/index.phtml</file>
         </group>
