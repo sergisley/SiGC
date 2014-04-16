@@ -34,11 +34,12 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin: 0px">
             <div class="navbar-inner" style="margin-left: 5px; margin-right: 20px">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img style="width: 25px;height: 25px" src="<?php echo $this->basePath('img/sigc-logo.png') ?>" alt="SiGC"/>
+                    <a class="navbar-brand" href="<?php echo $this->url('index') ?>"><img style="width: 25px;height: 25px" src="<?php echo $this->basePath('img/sigc-logo.png') ?>" alt="SiGC"/>
                         &nbsp;&nbsp;SiGC&nbsp;&nbsp;
                     </a>
 
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -56,7 +57,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php echo $this->url('chamado/criarchamado') ?>">
+                                    <a href="<?php echo $this->url('chamado/criarchamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-plus-sign"></span>
                                             &nbsp;  Criar
@@ -65,7 +66,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('chamado') ?>">
+                                    <a href="<?php echo $this->url('chamado/formulariochamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Meus Chamados
@@ -74,7 +75,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('chamado/chamadosabertos') ?>">
+                                    <a href="<?php echo $this->url('chamado/historicochamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-open"></span>
                                             &nbsp;    Em aberto
@@ -83,7 +84,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('chamado/pesquisar') ?>">
+                                    <a href="<?php echo $this->url('chamado/listarchamados') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-search"></span>
                                             &nbsp;   Pesquisar
@@ -103,7 +104,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php echo $this->url('gerenciar') ?>">
+                                    <a href="<?php echo $this->url('gerenciar/listarusuarios') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>
                                             &nbsp;  Usuários
@@ -112,7 +113,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('gerenciar/auditoria') ?>">
+                                    <a href="<?php echo $this->url('gerenciar/formularioequipamentos') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-hdd"></span>
                                             &nbsp;   Equipamentos
@@ -121,7 +122,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('gerenciar/catequipamentos') ?>">
+                                    <a href="<?php echo $this->url('gerenciar/formulariotipoequipamento') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-print"></span>
                                             &nbsp;    Categorias de Equipamentos
@@ -130,10 +131,19 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php echo $this->url('gerenciar/catchamados') ?>">
+                                    <a href="<?php echo $this->url('gerenciar/formulariocategorias') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Categorias de Chamado
+                                        </b>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<?php echo $this->url('gerenciar/historicoequipamento') ?>">
+                                        <b>
+                                            <span class="glyphicon glyphicon-folder-close"></span>
+                                            &nbsp;   Historico Equipamentos
                                         </b>
                                     </a>
                                 </li>
@@ -142,7 +152,7 @@
                     </ul>
                         <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="<?php echo $this->url('gerenciar') ?>">
+                            <a href="<?php echo $this->url('painel/painelcontrole') ?>">
                                 <b>
                                     <span class="glyphicon glyphicon-wrench"></span>
                                     &nbsp;Painel de Controle
@@ -160,8 +170,9 @@
                                 </b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>                                    
-                                     <a href="<?php echo $this->url('usuario') ?>">
+                                <li>   
+                                    <a href="<?php echo $this->url('usuario/perfil') ?>">                                
+                                     
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>                            
                                             &nbsp; Perfil
