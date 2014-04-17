@@ -10,10 +10,10 @@
 return array(
     'router' => array(
         'routes' => array(
-            'home' => array(
+            'index' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route' => '/',
+                    'route' => '/index',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action' => 'index',
@@ -21,54 +21,24 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'contatos' => array(
+                    'logon' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => 'home/contatos',
+                            'route' => '/logon',
                             'defaults' => array(
-                                'action' => 'contatos'
+                                'action' => 'logon'
                             )
                         )
                     ),
                 ),
             ),
+            // Inicio da rota para GERENCIAR
             'gerenciar' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/gerenciar',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Gerenciar',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'painel' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/painel',
-                            'defaults' => array(
-                                'action' => 'painel'
-                            )
-                        )
-                    ),
-                    'auditoria' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/auditoria',
-                            'defaults' => array(
-                                'action' => 'auditoria'
-                            )
-                        )
-                    ),
-                ),
-            ),
-                        'usuario' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route' => '/usuario',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Usuario',
                         'action' => 'index',
                     ),
                 ),
@@ -83,18 +53,69 @@ return array(
                             )
                         )
                     ),
-                    'xxxxxxxxx' => array(
+                    'formularioequipamentos' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/xxxxxxxx',
+                            'route' => '/formularioequipamentos',
                             'defaults' => array(
-                                'action' => 'xxxxxxxx'
+                                'action' => 'formularioequipamentos'
+                            )
+                        )
+                    ),
+                     'formulariotipoequipamento' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/formulariotipoequipamento',
+                            'defaults' => array(
+                                'action' => 'formulariotipoequipamento'
+                            )
+                        )
+                    ),
+                     'formulariocategorias' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/formulariocategorias',
+                            'defaults' => array(
+                                'action' => 'formulariocategorias'
+                            )
+                        )
+                    ),
+                    'historicoequipamento' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/historicoequipamento',
+                            'defaults' => array(
+                                'action' => 'historicoequipamento'
                             )
                         )
                     ),
                 ),
             ),
-                        'chamado' => array(
+            // Inicio da rota para PAINEL DE CONTROLE
+                'painel' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/painel',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Painel',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array( 
+                    'painelcontrole' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/painelcontrole',
+                            'defaults' => array(
+                                'action' => 'painelcontrole'
+                            )
+                        )
+                    ),
+                ),
+            ),
+            // Inicio da rota para CHAMADOS
+                'chamado' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/chamado',
@@ -105,6 +126,33 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'criarchamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/criarchamados',
+                            'defaults' => array(
+                                'action' => 'criarchamados'
+                            )
+                        )
+                    ),
+                    'formulariochamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/formulariochamados',
+                            'defaults' => array(
+                                'action' => 'formulariochamados'
+                            )
+                        )
+                    ),
+                    'historicochamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/historicochamados',
+                            'defaults' => array(
+                                'action' => 'historicochamados'
+                            )
+                        )
+                    ),
                     'listarchamados' => array(
                         'type' => 'literal',
                         'options' => array(
@@ -114,12 +162,26 @@ return array(
                             )
                         )
                     ),
-                    'xxxxxx' => array(
+                ),
+            ),
+               // Inicio da rota para USUARIO LOGADO
+                'usuario' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route' => '/usuario',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Usuario',
+                        'action' => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array( 
+                    'perfil' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/xxxxxx',
+                            'route' => '/perfil',
                             'defaults' => array(
-                                'action' => 'xxxxx'
+                                'action' => 'perfil'
                             )
                         )
                     ),
@@ -181,7 +243,8 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Gerenciar' => 'Application\Controller\GerenciarController',
             'Application\Controller\Chamado' => 'Application\Controller\ChamadoController',
-            'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
+            'Application\Controller\Painel' => 'Application\Controller\PainelController',
+             'Application\Controller\Usuario' => 'Application\Controller\UsuarioController',
         ),
     ),
     'view_manager' => array(

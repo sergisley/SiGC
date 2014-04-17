@@ -23,19 +23,32 @@ class GerenciarController extends AbstractActionController
     
    
    
-    public function painelAction()
+    public function listarusuariosAction()
     {
         return new ViewModel();
          
     }
     
-     public function auditoriaAction()
+     public function formularioequipamentosAction()
     {
         return new ViewModel();
          
     }
-    
-    
+    public function formulariotipoequipamentoAction()
+    {
+        return new ViewModel();
+         
+    }
+    public function formulariocategoriasAction()
+    {
+        return new ViewModel();
+         
+    }
+     public function historicoequipamentoAction()
+    {
+        return new ViewModel();
+         
+    }
     
     
     
