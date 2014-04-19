@@ -12,12 +12,28 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class PainelController extends AbstractActionController
 {
-    public function indexAction()
+   private $dominio;
+   
+   public function __construct() {
+       
+       $this->dominio = "http://localhost:8000/"; 
+   }
+    
+     public function painelcontroleAction()
     {
         return new ViewModel();
     }
+     
    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
