@@ -34,7 +34,7 @@ class ChamadoController extends AbstractActionController {
     }
 
     /**
-     * action index
+     * action listarchamados
      * @return \Zend\View\Model\ViewModel
      */
     public function listarchamadosAction() {
@@ -62,22 +62,7 @@ class ChamadoController extends AbstractActionController {
     }
 
     public function pesquisarAction() {
-   return new ViewModel();
-    }
-    
-     public function criarchamadosAction()
-    {
         return new ViewModel();
     }
-    public function formulariochamadosAction()
-    {
-        return new ViewModel();
-        
-    }
-     public function historicochamadosAction()
-    {
-        return new ViewModel();
-    }
-    
 
 }
