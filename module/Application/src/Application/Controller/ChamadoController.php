@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -6,106 +7,62 @@
  * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
+/**
+ * namespace de localizacao do nosso controller
+ */
 
 namespace Application\Controller;
 
+// import Zend\Mvc
 use Zend\Mvc\Controller\AbstractActionController;
+// import Zend\View
 use Zend\View\Model\ViewModel;
+// imort Model\ChamadoTable com alias
+use Application\Model\ChamadoTable as ModelChamado;
 
-class ChamadoController extends AbstractActionController
-{
-   private $dominio;
-   
-   public function __construct() {
-       
-       $this->dominio = "http://localhost:8000/"; 
-   }
-    
-     public function criarchamadoAction()
-    {
+class ChamadoController extends AbstractActionController {
+
+    private $dominio;
+
+    public function __construct() {
+
+        $this->dominio = "http://localhost:8000/";
+    }
+
+    public function criarchamadoAction() {
         return new ViewModel();
     }
-  
-    
-          /**
- * action index
- * @return \Zend\View\Model\ViewModel
- */
 
-    public function listarchamadosAction()
-    {
- 
     /**
-     * função anônima para var_dump estilizado
+     * action index
+     * @return \Zend\View\Model\ViewModel
      */
-    $myVarDump = function($nome_linha = "Nome da Linha", $data = null, $caracter = ' - ') {
-                echo str_repeat($caracter, 100) . '<br/>' . ucwords($nome_linha) . '<pre><br/>';
-                var_dump($data);
-                echo '</pre>' . str_repeat($caracter, 100) . '<br/><br/>';
-            };
- 
-    /**
-     * conexão com banco
-     */
-    $adapter = new \Zend\Db\Adapter\Adapter(array(
-        'driver'    => 'Pdo_Mysql',
-        'database'  => 'sigc_db',
-        'username'  => 'root',
-        'password'  => 'root'
-    ));
- 
-    /**
-     * obter nome do sehema do nosso banco
-     */
-    $myVarDump(
-            "Nome Schema", 
-            $adapter->getCurrentSchema()
-    );
- 
-    /**
-     * contar quantidade de elementos da nossa tabela
-     */
-    $myVarDump(
-            "Quantidade elementos tabela chamados", 
-            $adapter->query("SELECT * FROM `chamado`")->execute()->count()
-    );
- 
-    /**
-     * montar objeto sql e executar
-     */
-    $sql        = new \Zend\Db\Sql\Sql($adapter);
-    $select     = $sql->select()->from('chamado');
-    $statement  = $sql->prepareStatementForSqlObject($select);
-    $resultsSql = $statement->execute();
-    $myVarDump(
-            "Objet Sql com Select executado",
-            $resultsSql
-    );
- 
-    /**
-     * motar objeto resultset com objeto sql e mostrar resultado em array
-     */
-    $resultSet = new \Zend\Db\ResultSet\ResultSet;
-    $resultSet->initialize($resultsSql);
-    $myVarDump(
-            "Resultado do Objeto Sql para Array ",
-            $resultSet->toArray()
-    );
-    die(); 
-        
-        
-        
+    public function listarchamadosAction() {
+        // localizar adapter do banco
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+
+        // model ChamadoTable instanciado
+        $modelChamado = new ModelChamado($adapter); // alias para ChamadoTable
+
+        try {
+            $fetched = (array) $modelChamado->fetchAll();
+        } catch (\Exception $ex) {
+            $this->flashMessenger()->addErrorMessage($ex->getMessage());
+
+            return $this->redirect()->toRoute('index');
+        }
+
+        // enviar para view o array com key Chamado e value com todos os chamados
+        return new ViewModel(array('chamado' => $fetched));
     }
+
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-     public function chamadosabertosAction()
-    {
+    public function chamadosabertosAction() {
         return new ViewModel();
     }
-    public function pesquisarAction()
-    {
+
+    public function pesquisarAction() {
         return new ViewModel();
-    } 
-     
-    
-    
+    }
+
 }
