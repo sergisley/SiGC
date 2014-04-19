@@ -14,26 +14,8 @@ use Zend\View\Model\ViewModel;
 
 class UsuarioController extends AbstractActionController
 {
-   private $dominio;
-   
-   public function __construct() {
-       
-       $this->dominio = "http://localhost:8000/"; 
-   }
-    
-     public function listarusuariosAction()
+    public function perfilAction()
     {
         return new ViewModel();
     }
-     
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

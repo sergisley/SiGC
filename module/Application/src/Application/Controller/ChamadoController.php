@@ -29,6 +29,7 @@ class ChamadoController extends AbstractActionController {
         $this->dominio = "http://localhost:8000/";
     }
 
+<<<<<<< HEAD
     public function criarchamadoAction() {
         return new ViewModel();
     }
@@ -62,6 +63,32 @@ class ChamadoController extends AbstractActionController {
     }
 
     public function pesquisarAction() {
+=======
+class ChamadoController extends AbstractActionController
+{
+   private $dominio;
+   
+   public function __construct() {
+       
+       $this->dominio = "http://localhost:8000/"; 
+   }
+    
+     public function criarchamadosAction()
+    {
+        return new ViewModel();
+    }
+    public function formulariochamadosAction()
+    {
+        return new ViewModel();
+        
+    }
+     public function historicochamadosAction()
+    {
+        return new ViewModel();
+    }
+    public function listarchamadosAction()
+    {
+>>>>>>> b3c88ee99d69a91483afbcc4cd345dbb85ad32e4
         return new ViewModel();
     }
 
