@@ -10,9 +10,8 @@
 return array(
     'router' => array(
         'routes' => array(
-            
-            #rota literal para a home
-            'home' => array(
+            #rota literal para a index
+            'index' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/',
@@ -27,7 +26,7 @@ return array(
                     'contatos' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => 'home/contatos',
+                            'route' => 'index/contatos',
                             'defaults' => array(
                                 'action' => 'contatos'
                             )
@@ -47,16 +46,7 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'auditoria' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/auditoria',
-                            'defaults' => array(
-                                'action' => 'auditoria'
-                            )
-                        )
-                    ),
-                     'catequipamentos' => array(
+                    'catequipamentos' => array(
                         'type' => 'literal',
                         'options' => array(
                             'route' => '/catequipamentos',
@@ -65,7 +55,7 @@ return array(
                             )
                         )
                     ),
-                     'catchamados' => array(
+                    'catchamados' => array(
                         'type' => 'literal',
                         'options' => array(
                             'route' => '/catchamados',
@@ -76,9 +66,8 @@ return array(
                     ),
                 ),
             ),
-            
             #rota para o controller usuario
-                        'usuario' => array(
+            'usuario' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/usuario',
@@ -101,9 +90,8 @@ return array(
                     ),
                 ),
             ),
-            
             #rota literal para o controller chamados 
-                        'chamado' => array(
+            'chamado' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route' => '/chamado',
@@ -142,43 +130,67 @@ return array(
                         )
                     ),
                 ),
-            ), 
-            
-            
-            
-            
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            
-            #rota segment para controller chamados
-      /*      'application' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route' => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Index',
-                        'action' => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ), */
+            ),
+        // The following is a route to simplify getting started creating
+        // new controllers and actions without needing to create a new
+        // module. Simply drop new controllers in, and you can access them
+        // using the path /application/:controller/:action
+        /*
+
+          'index' => array(
+          'type' => 'Literal',
+          'options' => array(
+          'route' => '/',
+          'defaults' => array(
+          '__NAMESPACE__' => 'Application\Controller',
+          'controller' => 'Index',
+          'action' => 'index',
+          ),
+          ),
+          'may_terminate' => true,
+          'child_routes' => array(
+          'default' => array(
+          'type' => 'Segment',
+          'options' => array(
+          'route' => '/[:controller[/:action]]',
+          'constraints' => array(
+          'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+          ),
+          'defaults' => array(
+
+          ),
+          ),
+          ),
+          ),
+          ),
+          'chamado' => array(
+          'type' => 'Literal',
+          'options' => array(
+          'route' => '/chamado',
+          'defaults' => array(
+          '__NAMESPACE__' => 'Application\Controller',
+          'controller' => 'Chamado',
+          'action' => 'index',
+          ),
+          ),
+          'may_terminate' => true,
+          'child_routes' => array(
+          'default' => array(
+          'type' => 'Segment',
+          'options' => array(
+          'route' => '/[:controller[/:action]]',
+          'constraints' => array(
+          'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+          ),
+          'defaults' => array(
+
+          ),
+          ),
+          ),
+          ),
+          ), */
         ),
     ),
     'service_manager' => array(

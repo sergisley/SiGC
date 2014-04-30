@@ -28,8 +28,12 @@ class ChamadoController extends AbstractActionController {
 
         $this->dominio = "http://localhost:8000/";
     }
+    
+     public function criarchamadoAction() {
+        return new ViewModel();
+    }
 
-    public function criarchamadoAction() {
+    public function indexAction() {
         return new ViewModel();
     }
 
