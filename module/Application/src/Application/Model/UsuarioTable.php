@@ -9,7 +9,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway\TableGateway;
 
-class ChamadoTable {
+class UsuarioTable {
 
     protected $tableGateway;
 
@@ -20,13 +20,13 @@ class ChamadoTable {
      */
     public function __construct(Adapter $adapter) {
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Chamado());
+        $resultSetPrototype->setArrayObjectPrototype(new Usuario());
 
-        $this->tableGateway = new TableGateway('chamado', $adapter, null, $resultSetPrototype);
+        $this->tableGateway = new TableGateway('usuario', $adapter, null, $resultSetPrototype);
     }
 
     /**
-     * Recuperar todos os elementos da tabela chamado
+     * Recuperar todos os elementos da tabela Usuario
      * 
      * @return ResultSet
      */
@@ -38,10 +38,10 @@ class ChamadoTable {
     }
 
     /**
-     * Localizar linha especifico pelo id da tabela chamado
+     * Localizar linha especifico pelo id da tabela Usuario
      * 
      * @param type $id
-     * @return \Model\Chamado
+     * @return \Model\Usuario
      * @throws \Exception
      */
     public function find($id) {
@@ -49,7 +49,7 @@ class ChamadoTable {
         $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
-            throw new \Exception("Não foi encontrado chamado de id = {$id}");
+            throw new \Exception("Não foi encontrado usuário de id = {$id}");
         }
         return $row;
     }
@@ -58,26 +58,25 @@ class ChamadoTable {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
 
-    public function save(Chamado $chamado) {
+    public function save(Usuario $user) {
         $data = array(
-            'id' => $chamado->id,
-            'chamado_status' => $chamado->chamado_status,
-            'usuario_id' => $chamado->usuario_id,
-            'empresa_id' => $chamado->empresa_id,
-            'equipamento_id' => $chamado->equipamento_id,
-            'chamado_categoria_id' => $chamado->chamado_categoria_id,
-            'chamado_subcategoria_id' => $chamado->chamado_subcategoria_id,
-            'usuario_id_tecnico' => $chamado->usuario_id_tecnico,
+            'id' => $user->id,
+            'nome' => $user->nome,
+            'email' => $user->email,
+            'senha' => $user->senha,
+            'telefone' => $user->telefone,
+            'setor_id' => $user->setor_id,
+            'empresa_id' => $user->empresa_id,
         );
 
-        $id = (int) $chamado->id;
+        $id = (int) $user->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
             if ($this->find($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
-                throw new \Exception('Chamado não encontrado');
+                throw new \Exception('Usuário não encontrado.');
             }
         }
     }

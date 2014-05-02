@@ -56,7 +56,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php /* echo $this->url('chamado/criarchamado')*/ ?>">
+                                    <a href="<?php /* echo $this->url('chamado/criarchamado') */ ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-plus-sign"></span>
                                             &nbsp;  Criar
@@ -65,7 +65,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php /* echo $this->url('chamado') */?>">
+                                    <a href="<?php  echo $this->url('chamado')  ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Meus Chamados
@@ -93,11 +93,11 @@
                             </ul>
                         </li>
                     </ul>
-                     <ul class="nav navbar-nav navbar-left">
+                    <ul class="nav navbar-nav navbar-left">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <b>
-                                    <span class="glyphicon glyphicon-wrench"></span>
+                                    <span class="glyphicon glyphicon-cog"></span>
                                     &nbsp;Gerenciar
                                 </b>
                             </a>
@@ -112,7 +112,7 @@
                                 </li> 
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php /* echo $this->url('gerenciar/auditoria')*/ ?>">
+                                    <a href="<?php /* echo $this->url('gerenciar/auditoria') */ ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-hdd"></span>
                                             &nbsp;   Equipamentos
@@ -121,7 +121,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php /*echo $this->url('gerenciar/catequipamentos')*/ ?>">
+                                    <a href="<?php /* echo $this->url('gerenciar/catequipamentos') */ ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-print"></span>
                                             &nbsp;    Categorias de Equipamentos
@@ -130,7 +130,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php /* echo $this->url('gerenciar/catchamados')*/ ?>">
+                                    <a href="<?php /* echo $this->url('gerenciar/catchamados') */ ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Categorias de Chamado
@@ -139,18 +139,49 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                        <ul class="nav navbar-nav navbar-left">
-                        <li>
-                            <a href="<?php /* echo $this->url('gerenciar')*/ ?>">
+                    </ul>                    
+                   
+                    <!--     -->
+                     <ul class="nav navbar-nav navbar-left">
+                        <li class="dropdown">
+                            <a href="<?php echo $this->url('gerenciar') ?>" class="dropdown-toggle" data-toggle="dropdown">
                                 <b>
                                     <span class="glyphicon glyphicon-wrench"></span>
                                     &nbsp;Painel de Controle
                                 </b>
-                            </a>                             
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php echo $this->url('gerenciar/empresas') ?>">
+                                        <b>
+                                            <span class="glyphicon glyphicon-user"></span>
+                                            &nbsp;  Empresas
+                                        </b>
+                                    </a>
+                                </li> 
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<?php /* echo $this->url('gerenciar/auditoria')*/ ?>">
+                                        <b>
+                                            <span class="glyphicon glyphicon-hdd"></span>
+                                            &nbsp;   Auditoria
+                                        </b>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="<?php /* echo $this->url('gerenciar/auditoria')*/ ?>">
+                                        <b>
+                                            <span class="glyphicon glyphicon-th-large"></span>
+                                            &nbsp;   Painel
+                                        </b>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
-             
+                                            
+                    <!--     -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -161,7 +192,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>                                    
-                                     <a href="<?php /* echo $this->url('usuario')*/ ?>">
+                                    <a href="<?php /* echo $this->url('usuario') */ ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>                            
                                             &nbsp; Perfil
@@ -195,11 +226,11 @@
             </div>
         </nav>
         <br>
-       
+
         <div class="container divCard">
             <?php echo $this->content; ?>
             <br>
-            
+
             <div class="row" style="margin: 0px; padding: opx;">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="padding: 0;">
                     <hr style="border-top-color: #03899c; margin: 0px; border-top-width: 2px;" width="100%">
@@ -211,10 +242,10 @@
                     <hr style="border-top-color: #14d100; margin: 0px; border-top-width: 2px;">
                 </div>
             </div>
-          <footer>
+            <footer>
                 <p>Trabalho de Projeto Aplicado 5º Semestre 2014/1 Grupo 4 (ou 5) UNA</p>
             </footer>
         </div> <!-- /container -->
-     
+
     </body>
 </html>

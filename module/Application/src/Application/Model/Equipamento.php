@@ -5,9 +5,9 @@ namespace Application\Model;
 class Equipamento
 {
     public $id;
-    public $chamado_status;
+    public $descricao  ;
     public $usuario_id;
-    public $chamado_subcategoria_id;
+    public $equipamento_subcategoria_id;
    
  
     public function exchangeArray($data)

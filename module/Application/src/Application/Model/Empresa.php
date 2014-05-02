@@ -14,7 +14,6 @@ class Empresa
     $this->id                       = (!empty($data['id'])) ? $data['id'] : null;
     $this->nome                     = (!empty($data['nome'])) ? $data['nome'] : null;
     $this->usuario_id_responsavel   = (!empty($data['usuario_id_responsavel'])) ? $data['usuario_id_responsavel'] : null;
-    
- 
+     
     }
 }

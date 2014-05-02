@@ -11,6 +11,7 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Model\EmpresaTable as EmpresaChamado;
 
 class GerenciarController extends AbstractActionController
 {
@@ -49,7 +50,22 @@ class GerenciarController extends AbstractActionController
         return new ViewModel();
          
     }
-    
+    public function empresasAction(){
+      
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $empresaChamado = new EmpresaChamado($adapter);
+        try {
+            $fetched = $empresaChamado->fetchAll();
+            
+        } catch (\Exception $ex) {
+            $this->flashMessenger()->addErrorMessage($ex->getMessage());
+            echo 'erro bd';
+            //return $this->redirect()->toRoute('index');
+        }
+        
+        return new ViewModel(array('empresas' => $fetched));       
+        // return new ViewModel();
+    }
     
     
     

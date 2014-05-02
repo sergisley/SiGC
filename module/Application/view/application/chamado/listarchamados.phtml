@@ -1,32 +1,46 @@
+<?php
+$title = "Listagem de Chamados";
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<br>
+<br>
 
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-             <br>
-            AQUI IREMOS INSERIR O FORMULARIO ONDE IRÁ LISTAR OS CHAMADOS
-            <br>
-            <?php
-            
-            $chamado = $this->chamado;
-            
-            var_dump($chamado);
-                    
-            
-            ?>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
- 
+
+
+<table class="table">
+    <tr>
+        <th>id do chamado</th>
+        <th>status do chamado</th>
+        <th>id do usuário</th>
+        <th>id da empresa</th>
+        <th>id do equipamento</th>
+        <th> id da categoria do chamado</th>
+        <th> id da subcategoria do chamado</th>
+        <th> id de usuário do técnico</th>
+    </tr>
+    
+<?php foreach ($chamados as $chamado) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($chamado->id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->chamado_status); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->usuario_id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->empresa_id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->equipamento_id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->chamado_categoria_id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->chamado_subcategoria_id); ?></td>
+            <td><?php echo $this->escapeHtml($chamado->usuario_id_tecnico); ?></td>            
+        </tr>
+<?php endforeach; ?>
+</table>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

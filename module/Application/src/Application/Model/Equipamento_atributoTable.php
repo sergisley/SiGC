@@ -9,7 +9,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway\TableGateway;
 
-class ChamadoTable {
+class Equipamento_atributoTable {
 
     protected $tableGateway;
 
@@ -20,13 +20,13 @@ class ChamadoTable {
      */
     public function __construct(Adapter $adapter) {
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Chamado());
+        $resultSetPrototype->setArrayObjectPrototype(new Equipamento_atributo());
 
-        $this->tableGateway = new TableGateway('chamado', $adapter, null, $resultSetPrototype);
+        $this->tableGateway = new TableGateway('equipamento_atributo', $adapter, null, $resultSetPrototype);
     }
 
     /**
-     * Recuperar todos os elementos da tabela chamado
+     * Recuperar todos os elementos da tabela equipamento_atributo
      * 
      * @return ResultSet
      */
@@ -38,10 +38,10 @@ class ChamadoTable {
     }
 
     /**
-     * Localizar linha especifico pelo id da tabela chamado
+     * Localizar linha especifico pelo id da tabela equipamento_atributo
      * 
      * @param type $id
-     * @return \Model\Chamado
+     * @return \Model\Equipamento_atributo
      * @throws \Exception
      */
     public function find($id) {
@@ -49,7 +49,7 @@ class ChamadoTable {
         $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
-            throw new \Exception("Não foi encontrado chamado de id = {$id}");
+            throw new \Exception("Não foi encontrado equipamento_atributo de id = {$id}");
         }
         return $row;
     }
@@ -58,26 +58,21 @@ class ChamadoTable {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
 
-    public function save(Chamado $chamado) {
+    public function save(Equipamento_atributo $equipamento_atributo) {
         $data = array(
-            'id' => $chamado->id,
-            'chamado_status' => $chamado->chamado_status,
-            'usuario_id' => $chamado->usuario_id,
-            'empresa_id' => $chamado->empresa_id,
-            'equipamento_id' => $chamado->equipamento_id,
-            'chamado_categoria_id' => $chamado->chamado_categoria_id,
-            'chamado_subcategoria_id' => $chamado->chamado_subcategoria_id,
-            'usuario_id_tecnico' => $chamado->usuario_id_tecnico,
+            'id' => $equipamento_atributo->id,
+            'descricao' => $equipamento_atributo->descricao,
+            'equipamento_subcategoria_id' => $equipamento_atributo->equipamento_subcategoria_id,
         );
 
-        $id = (int) $chamado->id;
+        $id = (int) $equipamento_atributo->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
             if ($this->find($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
-                throw new \Exception('Chamado não encontrado');
+                throw new \Exception('Atributo não encontrado');
             }
         }
     }

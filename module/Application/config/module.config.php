@@ -26,9 +26,9 @@ return array(
                     'contatos' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => 'index/contatos',
+                            'route' => 'index/logon',
                             'defaults' => array(
-                                'action' => 'contatos'
+                                'action' => 'logon'
                             )
                         )
                     ),
@@ -52,6 +52,15 @@ return array(
                             'route' => '/catequipamentos',
                             'defaults' => array(
                                 'action' => 'catequipamentos'
+                            )
+                        )
+                    ),
+                    'empresas' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/empresas',
+                            'defaults' => array(
+                                'action' => 'empresas'
                             )
                         )
                     ),

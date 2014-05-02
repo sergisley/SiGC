@@ -17,6 +17,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 // import Zend\View
 use Zend\View\Model\ViewModel;
+
 // imort Model\ChamadoTable com alias
 use Application\Model\ChamadoTable as ModelChamado;
 
@@ -45,19 +46,29 @@ class ChamadoController extends AbstractActionController {
         // localizar adapter do banco
         $adapter = $this->getServiceLocator()->get('AdapterDb');
 
-        // model ChamadoTable instanciado
+        // instanciando model ChamadoTable
         $modelChamado = new ModelChamado($adapter); // alias para ChamadoTable
 
+        /*
+         return new ViewModel(array(
+             'chamado' => $this->$modelChamado()->fetchAll(),
+         ));
+        */
+        
+        
         try {
-            $fetched = (array) $modelChamado->fetchAll();
+            $fetched = $modelChamado->fetchAll();
+            
         } catch (\Exception $ex) {
             $this->flashMessenger()->addErrorMessage($ex->getMessage());
-
-            return $this->redirect()->toRoute('index');
+            echo 'erro bd';
+            //return $this->redirect()->toRoute('index');
         }
 
         // enviar para view o array com key Chamado e value com todos os chamados
-        return new ViewModel(array('chamado' => $fetched));
+        return new ViewModel(array('chamados' => $fetched));
+         
+         
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
