@@ -14,23 +14,24 @@ $this->headTitle($title);
         <th>Nome da Empresa</th>
         <th>Gerente Responsável</th>
         <th>&nbsp;</th>
-        <th>&nbsp;</th>
         <th>&nbsp;</th>      
     </tr>
-    
-<?php foreach ($empresas as $empresa) : ?>
+
+    <?php foreach ($empresas as $empresa) : ?>
         <tr>
             <td><?php echo $this->escapeHtml($empresa->id); ?></td>
             <td><?php echo $this->escapeHtml($empresa->nome); ?></td>
             <td><?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?></td>
-            <td>Editar Responsável</td>
             <td>Editar Empresa</td>
             <td>Excluir Empresa</td>          
         </tr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </table>
 <br>
 <br>
+<a href="<?php echo $this->escapeHtml($this->url('gerenciar/addempresas')) ?>">
+    Adicionar Empresas
+</a>
 <br>
 <br>
 <br>

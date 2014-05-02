@@ -1,0 +1,19 @@
+<?php
+ 
+ $title = 'Adicionar Empresa';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ 
+ $form->setAttribute('action', $this->url('gerenciar/addempresas'));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+ echo $this->formRow($form->get('nome'));
+ echo "<br>";
+ echo $this->formRow($form->get('usuario_id_responsavel'));
+ echo "<br>";
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();

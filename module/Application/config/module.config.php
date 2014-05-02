@@ -64,6 +64,16 @@ return array(
                             )
                         )
                     ),
+                    'addempresas' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/addempresas',
+                            'defaults' => array(
+                                'action' => 'addempresas'
+                            )
+                        )
+                    ),
+                    
                     'catchamados' => array(
                         'type' => 'literal',
                         'options' => array(
