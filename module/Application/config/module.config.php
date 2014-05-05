@@ -73,7 +73,24 @@ return array(
                             )
                         )
                     ),
-                    
+                    'editempresas' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/editempresas',
+                            'defaults' => array(
+                                'action' => 'editempresas'
+                            )
+                        )
+                    ),
+                    'delempresas' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/delempresas',
+                            'defaults' => array(
+                                'action' => 'delempresas'
+                            )
+                        )
+                    ),
                     'catchamados' => array(
                         'type' => 'literal',
                         'options' => array(

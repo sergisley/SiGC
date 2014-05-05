@@ -2,36 +2,78 @@
 $title = "Gerenciamento de Empresas";
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<br>
+<?php
+
+if (isset($_GET["msg"])) {
+  $msg = $_GET["msg"];
+  
+  if ($msg = 'empresanotfind'){
+   
+   echo '<div class="alert alert-warning alert-dismissable">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <strong>Erro!</strong> Empresa não encontrada!.
+</div>';
+      
+  }
+}
+?>
+
+<br>
+<div class="row">
+    <div class="col-lg-8">
+        <h1>
+            <?php echo $this->escapeHtml($title); ?>        
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3" style="position:absolute;
+         right:0px;">
+        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/addempresas')) ?>" class="btn-sm btn-primary">
+            Adicionar Empresas
+        </a>
+    </div>
+</div>
 <br>
 <br>
 
 
-
-<table class="table">
-    <tr>
-        <th>Id da Empresa</th>
-        <th>Nome da Empresa</th>
-        <th>Gerente Responsável</th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>      
-    </tr>
-
-    <?php foreach ($empresas as $empresa) : ?>
-        <tr>
-            <td><?php echo $this->escapeHtml($empresa->id); ?></td>
-            <td><?php echo $this->escapeHtml($empresa->nome); ?></td>
-            <td><?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?></td>
-            <td>Editar Empresa</td>
-            <td>Excluir Empresa</td>          
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-responsive" style="text-align: center">
+        <tr class="success">          
+            <th style="text-align: center">Nome da Empresa</th>
+            <th  style="text-align: center">Gerente Responsável</th>
+            <th style="text-align: center">&nbsp;</th>
+            <th style="text-align: center">&nbsp;</th> 
         </tr>
-    <?php endforeach; ?>
-</table>
+
+        <?php foreach ($empresas as $empresa) : ?>
+            <tr>                
+                <td>
+                    <?php echo $this->escapeHtml($empresa->nome); ?>
+                </td>
+                <td>
+                    <?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '?id=' . $empresa->id); ?>" class="btn-sm btn-warning">                                       
+                        Editar empresa
+                    </a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/delempresas') . '?id=' . $empresa->id); ?>" class="btn-sm btn-danger">  
+                        Excluir empresa
+                    </a>
+                </td>          
+            </tr>           
+            
+        <?php endforeach; ?>
+    </table>
+</div>
 <br>
 <br>
-<a href="<?php echo $this->escapeHtml($this->url('gerenciar/addempresas')) ?>">
-    Adicionar Empresas
-</a>
+
 <br>
 <br>
 <br>

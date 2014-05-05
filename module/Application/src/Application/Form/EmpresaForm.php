@@ -42,7 +42,7 @@ namespace Application\Form;
              'attributes' => array(
                  'value' => 'Salvar',
                  'id' => 'submitbutton',
-                 'class' => 'btn btn-success',
+                 'class' => 'btn btn-sm btn-success',
              ),
          ));
      }

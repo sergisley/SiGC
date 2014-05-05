@@ -19,6 +19,11 @@ class Empresa implements InputFilterAwareInterface {
         $this->usuario_id_responsavel = (!empty($data['usuario_id_responsavel'])) ? $data['usuario_id_responsavel'] : null;
     }
 
+      public function getArrayCopy()
+     {
+         return get_object_vars($this);
+     }
+    
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Not used");
     }

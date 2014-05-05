@@ -1,16 +1,17 @@
 <?php
-$title = 'Adicionar Empresa';
+$title = 'Editar Empresa';
 $this->headTitle($title);
 ?>
 
-<h1>
-    <?php echo $this->escapeHtml($title); ?>
-</h1>
+    <h1>
+        <?php echo $this->escapeHtml($title); ?>
+    </h1>
 <br>&nbsp;
-<br>
+    <br>
 
 <?php
-$form->setAttribute('action', $this->url('gerenciar/addempresas'));
+$form = $this->form;
+$form->setAttribute('action', $this->url('gerenciar/editempresas'));
 $form->prepare();
 echo "<div class='form-group'>";
 echo $this->form()->openTag($form);
@@ -22,12 +23,12 @@ echo "</div>";
 echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 ?>
-&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;
 <a href="<?php echo $this->escapeHtml($this->url('gerenciar/empresas')) ?>" >
-    <button class="btn btn-sm btn-warning">
-        Voltar
+    <button class="btn btn-sm btn-warning" onclick="">
+    Voltar
     </button>
 </a>
-
-<br>
-<br>
+    
+    <br>
+    <br>
