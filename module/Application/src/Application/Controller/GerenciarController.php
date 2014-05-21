@@ -48,8 +48,6 @@ class GerenciarController extends AbstractActionController {
 
     public function empresasAction() {
 
-
-
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
 
@@ -64,9 +62,6 @@ class GerenciarController extends AbstractActionController {
     }
 
     public function addempresasAction() {
-
-
-
 
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
@@ -95,55 +90,46 @@ class GerenciarController extends AbstractActionController {
 
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
-
-        if (isset($_GET["id"])) {
-            $id = $_GET["id"];
-        } else {
-            return $this->redirect()->toRoute('gerenciar/empresas');
-            //  ($this->url('gerenciar/empresas') . '?msg=empresanotfind')
-        }
-        /*
+        
           $id = (int) $this->params()->fromRoute('id', 0);
-          if (!$id) {
-          return $this->redirect()->toRoute('empresa', array(
-          'action' => 'add'
-          ));
-          }
+  
 
-          // Get the Empresa with the specified id.  An exception is thrown
-          // if it cannot be found, in which case go to the index page.
-         */
         try {
             $empresa = $empresa_dao->find($id);
         } catch (\Exception $ex) {
-            return $this->redirect()->toRoute('gerenciar/empresas');
+             return $this->redirect()->toRoute('gerenciar/empresas');
         }
 
-        $form = new EmpresaForm();
-        $form->bind($empresa);
-        $form->get('submit')->setAttribute('value', 'Salvar Edição');
-
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($empresa->getInputFilter());
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
+        return array(           
+            'empresa' => $empresa,
+        ); 
+    }
+    
+    public function editempresasaveAction(){
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $empresa_dao = new EmpresaDAO($adapter);
+        
+             
+          $id = (int) $this->params()->fromRoute('id', 0);
+          
+         $nome = $this->getRequest()->getPost('nome');
+         $usuario_id_responsavel = $this->getRequest()->getPost('usuario_id_responsavel');
+        
+         $empresa = new Empresa();
+          
+         $empresa->id = $id;
+         $empresa->nome = $nome;
+         $empresa->usuario_id_responsavel = $usuario_id_responsavel;
+         
                 $empresa_dao->save($empresa);
 
-                // Redirect to list of empresa
-                return $this->redirect()->toRoute('gerenciar/empresas');
-            }
-        }
-
-            return array(
-                'id' => $id,
-                'form' => $form,
-            );
-        }
+                
+          return $this->redirect()->toRoute('gerenciar/empresas');           
         
-         public function delempresasAction()
-     {
+    }
+    
+
+    public function delempresasAction() {
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
 
@@ -154,24 +140,23 @@ class GerenciarController extends AbstractActionController {
             //  ($this->url('gerenciar/empresas') . '?msg=empresanotfind')
         }
 
-         $request = $this->getRequest();
-         if ($request->isPost()) {
-             $del = $request->getPost('del', 'No');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'Não');
 
-             if ($del == 'Yes') {
-                 $id = (int) $request->getPost('id');
-                 $empresa_dao->delete($id);
-             }
+            if ($del == 'Sim') {
+                $id = (int) $request->getPost('id');
+                $empresa_dao->delete($id);
+            }
 
-             // Redirect to list of empresas
-           return $this->redirect()->toRoute('gerenciar/empresas');
-         }
+            // Redirect to list of empresas
+            return $this->redirect()->toRoute('gerenciar/empresas');
+        }
 
-         return array(
-             'id'    => $id,
-             'nome' => $empresa_dao->find($id)
-         );
-            
-     }
+        return array(
+            'id' => $id,
+            'empresa' => $empresa_dao->find($id)
+        );
+    }
 
 }

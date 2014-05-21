@@ -74,11 +74,12 @@ class EmpresaTable
          if ($id == 0) {
              $this->tableGateway->insert($data);
          } else {
-             if ($this->find($id)) {
+        //     if ($this->find($id)) {
+                // throw new \Exception('Empresa encontrada!!!');
                  $this->tableGateway->update($data, array('id' => $id));
-             } else {
-                 throw new \Exception('Empresa não encontrada');
-             }
+       //      } else {
+        //         throw new \Exception('Empresa não encontrada');
+          //   }
          }
      }
      

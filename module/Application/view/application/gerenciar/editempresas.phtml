@@ -3,32 +3,40 @@ $title = 'Editar Empresa';
 $this->headTitle($title);
 ?>
 
-    <h1>
-        <?php echo $this->escapeHtml($title); ?>
-    </h1>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
 <br>&nbsp;
-    <br>
+<br>
+
 
 <?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('gerenciar/editempresas'));
-$form->prepare();
-echo "<div class='form-group'>";
-echo $this->form()->openTag($form);
-echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('nome'));
-echo "&nbsp;&nbsp;";
-echo $this->formRow($form->get('usuario_id_responsavel'));
-echo "</div>";
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+$empresa = $this->empresa;
 ?>
+
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('gerenciar/editempresasave') . '/' . $empresa->id) ?>">
+    <div class="form-group">
+        <label for="nome">Nome:
+        </label>
+        <input id="nome" name="nome" type="text" class="form-control" value="<?php echo $this->escapeHtml($empresa->nome); ?>"> 
+    </div>
+    <input type="hidden" value="<?php echo $this->escapeHtml($empresa->id); ?>">
+    <div class="form-group">
+        <label for="usuario_id_responsavel">Responsável:
+        </label>
+        <select id="modalidade" name="usuario_id_responsavel" class="form-control">
+            <option value="<?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>"><?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?></option>
+            <option value="#">carregar outros funcionários da mesma empresa</option>                        
+        </select>
+    </div>
+    <input type="submit" value="Salvar" class="btn btn-success">
+ 
     &nbsp;&nbsp;&nbsp;
-<a href="<?php echo $this->escapeHtml($this->url('gerenciar/empresas')) ?>" >
-    <button class="btn btn-sm btn-warning" onclick="">
-    Voltar
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/empresas')); ?>" style="color: white" >
+        Voltar       
+    </a>
     </button>
-</a>
-    
-    <br>
-    <br>
+</form>
+<br>
+<br>

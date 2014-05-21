@@ -74,14 +74,30 @@ return array(
                         )
                     ),
                     'editempresas' => array(
-                        'type' => 'literal',
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/editempresas',
+                            'route' => '/editempresas[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
                             'defaults' => array(
                                 'action' => 'editempresas'
                             )
                         )
                     ),
+                    'editempresasave' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/editempresasave[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'editempresasave'
+                            )
+                        )
+                    ),
+                    
                     'delempresas' => array(
                         'type' => 'literal',
                         'options' => array(

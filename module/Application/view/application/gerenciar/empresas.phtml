@@ -4,26 +4,49 @@ $this->headTitle($title);
 ?>
 <br>
 <?php
-
 if (isset($_GET["msg"])) {
-  $msg = $_GET["msg"];
-  
-  if ($msg = 'empresanotfind'){
-   
-   echo '<div class="alert alert-warning alert-dismissable">
+    $msg = $_GET["msg"];
+
+    if ($msg = 'empresanotfind') {
+
+        echo '<div class="alert alert-warning alert-dismissable">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <strong>Erro!</strong> Empresa não encontrada!.
 </div>';
-      
-  }
+    }
 }
 ?>
+<script>
+/*
 
+    $(function() {
+        $('.checkbox-divida').change(function() {
+            var idDivida = $(this).prop('id');
+            var tipoDivida = $(this).prop('name');
+            var parentTR = $(this).parents('tr');
+            $.ajax('<?php /* echo $this->url('protesto/ignorar'); */?>', {
+                data: {id: idDivida, tipo: tipoDivida},
+                type: 'GET',
+                success: function(data) {
+                    if (data === '{"estado":1}') {
+                        parentTR.attr("class", "danger");
+                    }
+                    if (data === '{"estado":0}') {
+                        parentTR.attr("class", " ");
+                    }
+                },
+                error: function(error) {
+                    alert(error);
+                }
+            });
+        });
+    });*/
+</script>
 <br>
 <div class="row">
     <div class="col-lg-8">
         <h1>
-            <?php echo $this->escapeHtml($title); ?>        
+<?php echo $this->escapeHtml($title); ?>        
         </h1>
     </div>
 </div>
@@ -48,16 +71,16 @@ if (isset($_GET["msg"])) {
             <th style="text-align: center">&nbsp;</th> 
         </tr>
 
-        <?php foreach ($empresas as $empresa) : ?>
+<?php foreach ($empresas as $empresa) : ?>
             <tr>                
                 <td>
-                    <?php echo $this->escapeHtml($empresa->nome); ?>
+    <?php echo $this->escapeHtml($empresa->nome); ?>
                 </td>
                 <td>
-                    <?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>
+    <?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>
                 </td>
                 <td>
-                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '?id=' . $empresa->id); ?>" class="btn-sm btn-warning">                                       
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id); ?>" class="btn-sm btn-warning">                                       
                         Editar empresa
                     </a>
                 </td>
@@ -67,8 +90,8 @@ if (isset($_GET["msg"])) {
                     </a>
                 </td>          
             </tr>           
-            
-        <?php endforeach; ?>
+
+<?php endforeach; ?>
     </table>
 </div>
 <br>

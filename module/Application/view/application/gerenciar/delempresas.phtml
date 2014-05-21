@@ -3,21 +3,29 @@ $title = 'Excluir Empresa';
 $this->headTitle($title);
 ?>
 
- <h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+<br>
+<br>
+<br> 
+<p>Você tem certeza que deseja excluir a empresa <strong> 
+        <?php echo $this->escapeHtml($empresa->nome); ?> </strong>?    
+</p>
+<?php
+$url = $this->escapeHtml($this->url('gerenciar/delempresas') . '?id=' . $empresa->id);
+?>
 
- <p>Are you sure that you want to delete
-     <?php  echo $this->escapeHtml($empresa->nome); ?>' by
-    
- </p>
- <?php
- $url = $this->escapeHtml($this->url('gerenciar/delempresas') . '?id=' . $empresa->id);
- 
-
- ?>
- <form action="<?php echo $url; ?>" method="post">
- <div>
-     <input type="hidden" name="id" value="<?php echo (int) $empresa->id; ?>" />
-     <input type="submit" name="del" value="Yes" />
-     <input type="submit" name="del" value="No" />
- </div>
- </form>
+<br> 
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="id" value="<?php echo (int) $empresa->id; ?>" />
+        &nbsp; &nbsp; &nbsp; &nbsp;
+        <input type="submit" name="del" value="Sim" class="btn btn-danger" />
+        &nbsp; &nbsp;
+        <input type="submit" name="del" value="Não" class="btn btn-warning" />
+    </div>
+</form>
+<br>
+<br>
+<br> 
