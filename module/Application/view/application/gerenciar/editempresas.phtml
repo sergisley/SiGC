@@ -12,6 +12,8 @@ $this->headTitle($title);
 
 <?php
 $empresa = $this->empresa;
+$funcionarios = $this->funcionarios;
+$responsavel = $this->responsavel;
 ?>
 
 <form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('gerenciar/editempresasave') . '/' . $empresa->id) ?>">
@@ -25,17 +27,21 @@ $empresa = $this->empresa;
         <label for="usuario_id_responsavel">Responsável:
         </label>
         <select id="modalidade" name="usuario_id_responsavel" class="form-control">
-            <option value="<?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>"><?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?></option>
-            <option value="#">carregar outros funcionários da mesma empresa</option>                        
+            <option value="<?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>"><?php echo $this->escapeHtml($responsavel); ?> (selecionado) </option>
+            <?php foreach ($funcionarios as $funcionario) : ?>
+                <option value="<?php echo $this->escapeHtml($funcionario->id); ?>">
+                    <?php echo $this->escapeHtml($funcionario->nome); ?>  
+                </option>       
+            <?php endforeach; ?>
         </select>
     </div>
     <input type="submit" value="Salvar" class="btn btn-success">
- 
+
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-warning">
         <a href="<?php echo $this->escapeHtml($this->url('gerenciar/empresas')); ?>" style="color: white" >
-        Voltar       
-    </a>
+            Voltar       
+        </a>
     </button>
 </form>
 <br>

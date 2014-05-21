@@ -17,6 +17,9 @@ use Application\Model\EmpresaTable as EmpresaDAO;
 use Application\Model\Empresa;
 use Application\Form\EmpresaForm;
 
+use Application\Model\UsuarioTable as UsuarioDAO;
+use Application\Model\Usuario;
+
 class GerenciarController extends AbstractActionController {
 
     private $dominio;
@@ -50,15 +53,17 @@ class GerenciarController extends AbstractActionController {
 
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
+         $usuario_dao = new UsuarioDAO($adapter);
 
         try {
-            $fetched = $empresa_dao->fetchAll();
+            $empresas = $empresa_dao->fetchAll();
         } catch (\Exception $ex) {
             $this->flashMessenger()->addErrorMessage($ex->getMessage());
             echo 'erro bd';
         }
-
-        return new ViewModel(array('empresas' => $fetched));
+       
+        
+        return new ViewModel(array('empresas' => $empresas));
     }
 
     public function addempresasAction() {
@@ -90,6 +95,7 @@ class GerenciarController extends AbstractActionController {
 
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
+        $usuario_dao = new UsuarioDAO($adapter);
         
           $id = (int) $this->params()->fromRoute('id', 0);
   
@@ -99,13 +105,22 @@ class GerenciarController extends AbstractActionController {
         } catch (\Exception $ex) {
              return $this->redirect()->toRoute('gerenciar/empresas');
         }
+        
+        $usuarioResponsavel = $usuario_dao->find($empresa->usuario_id_responsavel);
+        
+        $responsavel = $usuarioResponsavel->nome;
+        
+        $funcionarios = $usuario_dao->findEmpresa($empresa->id);
 
         return array(           
             'empresa' => $empresa,
+            'responsavel' => $responsavel,
+            'funcionarios' => $funcionarios,
         ); 
     }
     
     public function editempresasaveAction(){
+        
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
         
@@ -158,5 +173,7 @@ class GerenciarController extends AbstractActionController {
             'empresa' => $empresa_dao->find($id)
         );
     }
+    
+    
 
 }

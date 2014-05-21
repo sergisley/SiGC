@@ -53,6 +53,15 @@ class UsuarioTable {
         }
         return $row;
     }
+    
+    
+    public function findEmpresa($empresa){
+        
+       //$data = $this->tableGateway->select(array('empresa_id' => $empresa));
+$data = $this->tableGateway->select();
+        return $data;        
+        
+    }
 
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));

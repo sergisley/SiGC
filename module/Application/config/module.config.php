@@ -131,12 +131,15 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     #rota literal para action de EXEMPLO
-                    'xxxxxxxxx' => array(
-                        'type' => 'literal',
+                    'nomefuncionario' => array(
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/xxxxxxxx',
+                            'route' => '/nomefuncionario[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
                             'defaults' => array(
-                                'action' => 'xxxxxxxx'
+                                'action' => 'nomefuncionario'
                             )
                         )
                     ),

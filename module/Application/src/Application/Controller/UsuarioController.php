@@ -11,6 +11,10 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+//entidade usuario
+use Application\Model\UsuarioTable as UsuarioDAO;
+use Application\Model\Usuario;
+use Zend\Json\Json;
 
 class UsuarioController extends AbstractActionController
 {
@@ -18,4 +22,20 @@ class UsuarioController extends AbstractActionController
     {
         return new ViewModel();
     }
+    
+    public function nomefuncionarioAction(){
+        $adapter = $this->getServiceLocator()->get('AdapterDb');        
+        $usuario_dao = new UsuarioDAO($adapter);
+        
+          $id = (int) $this->params()->fromRoute('id', 0);
+          
+           $usuario = $usuario_dao->find($id);   
+                  
+         $data = array(
+            'nome' => $usuario->nome,
+        );
+
+        return $this->getResponse()->setContent(Json::encode($data));
+    }
+    
 }
