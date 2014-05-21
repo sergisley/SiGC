@@ -17,14 +17,13 @@ if (isset($_GET["msg"])) {
 }
 ?>
 <script>
-/*
 
     $(function() {
         $('.checkbox-divida').change(function() {
             var idDivida = $(this).prop('id');
             var tipoDivida = $(this).prop('name');
             var parentTR = $(this).parents('tr');
-            $.ajax('<?php /* echo $this->url('protesto/ignorar'); */?>', {
+            $.ajax('<?php  echo $this->url('usuario/nomefuncionario'); ?>', {
                 data: {id: idDivida, tipo: tipoDivida},
                 type: 'GET',
                 success: function(data) {
@@ -40,7 +39,7 @@ if (isset($_GET["msg"])) {
                 }
             });
         });
-    });*/
+    });
 </script>
 <br>
 <div class="row">

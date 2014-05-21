@@ -27,12 +27,16 @@ class UsuarioController extends AbstractActionController
         $adapter = $this->getServiceLocator()->get('AdapterDb');        
         $usuario_dao = new UsuarioDAO($adapter);
         
-          $id = (int) $this->params()->fromRoute('id', 0);
-          
+        if (isset($_GET["id"])) {
+            $id = $_GET["id"];
+        }
+            
            $usuario = $usuario_dao->find($id);   
                   
+           $nome = $usuario->nome;
+           
          $data = array(
-            'nome' => $usuario->nome,
+            'nome' =>$nome,
         );
 
         return $this->getResponse()->setContent(Json::encode($data));

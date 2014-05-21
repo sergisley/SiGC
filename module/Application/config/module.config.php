@@ -134,10 +134,7 @@ return array(
                     'nomefuncionario' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/nomefuncionario[/:id]',
-                            'constraints' => array(
-                                'Id' => '[0-9]+',
-                            ),
+                            'route' => '/nomefuncionario',
                             'defaults' => array(
                                 'action' => 'nomefuncionario'
                             )
