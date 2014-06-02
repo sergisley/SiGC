@@ -1,8 +1,12 @@
 <?php
 $title = "Listagem de Chamados";
 $this->headTitle($title);
+
+$id_user = 2;
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1>
+            <?php echo $this->escapeHtml($title); ?>
+        </h1>
 <br>
 <br>
 <table class="table table-hover">
@@ -13,9 +17,12 @@ $this->headTitle($title);
         <th>Subcategoria</th>
         <th>Equipamento</th>
         <th>Técnico Responsável</th>
-        <th>&nbsp;</th>
+        <th>
+            <a class="btn-sm btn-info" href="<?php echo $this->escapeHtml($this->url('chamado/addchamado') . '/' . $id_user) ?>">
+                Adicionar Chamado
+            </a>
+        </th>
     </tr>
-
     <?php foreach ($chamados as $chamado) : ?>
         <tr>           
             <td><?php echo $this->escapeHtml($chamado->chamado_status); ?></td>
@@ -29,7 +36,6 @@ $this->headTitle($title);
                     Exibir Chamado
                 </a>
             </td>
-
         </tr>
     <?php endforeach; ?>
 </table>

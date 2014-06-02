@@ -8,6 +8,7 @@ class Equipamento
     public $descricao  ;
     public $usuario_id;
     public $equipamento_subcategoria_id;
+    public $setor_id;
    
  
     public function exchangeArray($data)
@@ -16,7 +17,7 @@ class Equipamento
     $this->descricao                     = (!empty($data['descricao'])) ? $data['descricao'] : null;
     $this->usuario_id                    = (!empty($data['usuario_id'])) ? $data['usuario_id'] : null;
     $this->equipamento_subcategoria_id   = (!empty($data['equipamento_subcategoria_id'])) ? $data['equipamento_subcategoria_id'] : null;
-    
+    $this->setor_id                      = (!empty($data['setor_id'])) ? $data['setor_id'] : null;
  
     }
 }

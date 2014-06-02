@@ -10,6 +10,7 @@ class Historico
     public $datahora;
     public $chamado_id;
     public $usuario_id;
+    public $equipamento_id;
     
  
     public function exchangeArray($data)
@@ -18,8 +19,9 @@ class Historico
     $this->descricao                = (!empty($data['descricao'])) ? $data['descricao'] : null;
     $this->acao                     = (!empty($data['acao'])) ? $data['acao'] : null;        
     $this->chamado_id               = (!empty($data['chamado_id'])) ? $data['chamado_id'] : null;
-    $this->usuario_id               = (!empty($data['usuario_id '])) ? $data['usuario_id '] : null;    
+    $this->usuario_id               = (!empty($data['usuario_id'])) ? $data['usuario_id'] : null;    
     $this->datahora                 = (!empty($data['datahora'])) ? $data['datahora'] : null;
+    $this->equipamento_id           = (!empty($data['equipamento_id'])) ? $data['equipamento_id'] : null;
         
  
     }

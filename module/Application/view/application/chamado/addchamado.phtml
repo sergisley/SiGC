@@ -1,0 +1,70 @@
+<?php
+$title = 'Adicionar Chamado';
+$this->headTitle($title);
+?>
+
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+<br>&nbsp;
+<br>
+
+<?php
+
+?>
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('chamado/addchamado')) ?>">
+    
+    <input type="text" name="id_usuario" hidden="hidden" value="<?php echo $this->escapeHtml('2') ?>">
+    
+   <div class="form-group">
+        <label for="equipamento_id">Equipamento:
+        </label>
+        <select id="modalidade" name="equipamento_id" class="form-control">
+            <?php
+            foreach ($equipamentos as $equipamento):
+            ?>
+            <option value="<?php echo $this->escapeHtml($equipamento->id); ?>"><?php echo $this->escapeHtml($equipamento->descricao); ?></option>            
+            <?php
+        endforeach;
+            ?>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="chamado_categoria_id">Categoria do Chamado:
+        </label>
+        <select id="modalidade" name="chamado_categoria_id" class="form-control">
+            <?php
+            foreach ($catchamados as $catchamado):
+            ?>
+            <option value="<?php echo $this->escapeHtml($catchamado->id); ?>"><?php echo $this->escapeHtml($catchamado->descricao); ?></option>            
+            <?php
+        endforeach;
+            ?>
+        </select>
+    </div> 
+    
+    <div class="form-group">
+        <label for="chamado_subcategoria_id">Subcategoria do Chamado:
+        </label>
+        <select id="modalidade" name="chamado_subcategoria_id" class="form-control">
+            <option value="1">A adicionar</option>            
+        </select>
+    </div> 
+    
+    <div class="form-group">
+        <label for="descricao">Descrição:
+        </label>
+        <input id="nome" name="descricao" type="text" class="form-control"> 
+    </div>
+    
+    <input type="submit" value="Salvar" class="btn btn-success">
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('chamado')); ?>" style="color: white" >
+            Voltar       
+        </a>
+    </button>
+</form>
+<br>
+<br>

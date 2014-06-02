@@ -53,6 +53,14 @@ class HistoricoTable {
         }
         return $row;
     }
+    
+    public function fetchbychamado($chamado_id){
+        
+       $chamado_id = (int) $chamado_id;
+       $data = $this->tableGateway->select(array('chamado_id' => $chamado_id)); 
+        
+       return $data; 
+    }
 
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));
@@ -66,6 +74,7 @@ class HistoricoTable {
             'chamado_id' => $historico->chamado_id,
             'datahora' => $historico->datahora,
             'descricao' => $historico->descricao,
+            'equipamento_id' => $historico->equipamento_id,
         );
 
         $id = (int) $historico->id;

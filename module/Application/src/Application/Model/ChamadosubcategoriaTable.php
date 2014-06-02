@@ -52,8 +52,15 @@ class ChamadosubcategoriaTable {
             throw new \Exception("Não foi encontrado chamado subcategoria de id = {$id}");
         }
         return $row;
-    }
-
+    }   
+    
+    public function fetchbycatchamado($chamado_categoria_id) {
+        $chamado_categoria_id = (int) $chamado_categoria_id;
+        $data = $this->tableGateway->select(array('chamado_categoria_id' => $chamado_categoria_id));
+        
+        return $data;
+    }  
+    
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));
     }

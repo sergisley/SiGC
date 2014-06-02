@@ -170,6 +170,27 @@ return array(
                             )
                         )
                     ),
+                    'addchamado' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/addchamado[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),                            
+                            'defaults' => array(
+                                'action' => 'addchamado'
+                            )
+                        )
+                    ),                    
+                    'ajaxsubcatchamado' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/ajaxsubcatchamado',
+                            'defaults' => array(
+                                'action' => 'ajaxsubcatchamado'
+                            )
+                        )
+                    ),                    
                 ),
             ),
         ),
@@ -217,7 +238,7 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
-    ),
+    ),   
     'strategies' => array(
         'ViewJsonStrategy',
     ),

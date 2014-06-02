@@ -53,6 +53,13 @@ class EquipamentoTable {
         }
         return $row;
     }
+    
+     public function findsetor($setor_id) {
+        $setor_id = (int) $setor_id;
+        $data = $this->tableGateway->select(array('setor_id' => $setor_id));
+        
+        return $data;
+    }
 
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));
@@ -64,6 +71,7 @@ class EquipamentoTable {
             'descricao' => $equipamento->descricao,
             'equipamento_subcategoria_id' => $equipamento->equipamento_subcategoria_id,
             'usuario_id' => $equipamento->usuario_id,
+            'setor_id' => $equipamento->setor_id,
         );
 
         $id = (int) $equipamento->id;

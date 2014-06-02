@@ -64,7 +64,6 @@ class ChamadoTable {
             'chamado_status' => $chamado->chamado_status,
             'usuario_id' => $chamado->usuario_id,
             'equipamento_id' => $chamado->equipamento_id,
-            'chamado_categoria_id' => $chamado->chamado_categoria_id,
             'chamado_subcategoria_id' => $chamado->chamado_subcategoria_id,
             'usuario_id_tecnico' => $chamado->usuario_id_tecnico,
         );
@@ -72,6 +71,9 @@ class ChamadoTable {
         $id = (int) $chamado->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
+             $inserted_id = $this->tableGateway->lastInsertValue;
+             
+             return $inserted_id;
         } else {
             if ($this->find($id)) {
                 $this->tableGateway->update($data, array('id' => $id));

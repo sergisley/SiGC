@@ -27,11 +27,9 @@ $this->headTitle($title);
             </font>
         </small>
     </h1>
-    <?php
-    //echo $this->escapeHtml($chamado->id);
-    ?>
     <br>
     <div>
+       
         <strong>
             Usuário:
         </strong>
@@ -44,11 +42,19 @@ $this->headTitle($title);
         <strong>
             Técnico:
         </strong>
-        <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id_tecnico) ?>" style="color:black">
-            <?php
-            echo $this->escapeHtml($tecnico);
+        <?php
+        if ($tecnico == 'Sem Técnico') {
+            echo $this->escapeHtml('Sem Ténico Responsável');
+        } else {
             ?>
-        </a>
+            <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id_tecnico) ?>" style="color:black">
+                <?php
+                echo $this->escapeHtml($tecnico);
+                ?>
+            </a>
+            <?php
+        }
+        ?>
         <br>
         <strong>
             Categoria do Chamado:
@@ -63,7 +69,6 @@ $this->headTitle($title);
             Equipamento: 
         </strong>
         <a href="<?php echo $this->escapeHtml($this->url('gerenciar/exibirequipamento') . '/' . $chamado->equipamento_id) ?>" style="color: black;">
-
             <?php
             echo $this->escapeHtml($cat_equipamento);
             ?>
@@ -75,8 +80,7 @@ $this->headTitle($title);
             ?>
         </a>
         <br>
-        
-        
+        <br>
         <a class="btn btn-warning" href="<?php echo $this->escapeHtml($this->url('chamado/editchamado') . '/' . $chamado->id) ?>">
             Editar
         </a>
@@ -86,17 +90,67 @@ $this->headTitle($title);
         </a>
         <br>
         <br>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Histórico
-            </div>
-            <div class="panel-body">
-                ...
-            </div>
-        </div>
-        
-
     </div>
+          
+        <table class='table table-hover' style='font-size: medium;'>
+            <tr>
+                <th colspan='5'>
+                   Histórico 
+                </th>
+            </tr>
+                <th>
+                    Ação  
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Data e Hora
+                </th>
+                <th>
+                    Usuário
+                </th>
+                <th>
+                    Perfil
+                </th>
+            </tr>
+            <?php
+            foreach ($historicos as $historico):
+                ?>
+                <tr>
+                    <td>
+                        <?php
+                        echo $this->escapeHtml($historico->acao);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                        echo $this->escapeHtml($historico->descricao);
+                        ?>
+                    </td>                    
+                    <td>
+                        <?php
+                        $dataehora = $historico->datahora;
+                        list($data, $hora)= explode(" ", $dataehora);
+                        list ($ano, $mes, $dia) = explode('-',$data);                       
+                        $dataf = $dia."/".$mes."/".$ano;
+                        echo $this->escapeHtml($dataf." às ".$hora);
+                        ?>
+                    </td>                    
+                    <td>
+                        <?php
+                         echo $this->escapeHtml($hist_users[$historico->id]);
+                        ?>
+                    </td>
+                    <td>
+                        <?php
+                         echo $this->escapeHtml($hist_perfil[$historico->id]);
+                        ?>
+                    </td>
+                </tr>
+                <?php
+            endforeach;
+            ?>
+        </table>
+    </div> 
 
-
-</div>

@@ -90,8 +90,6 @@ class GerenciarController extends AbstractActionController {
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
 
-
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $nome = $request->getPost('nome');
