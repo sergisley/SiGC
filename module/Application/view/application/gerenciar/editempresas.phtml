@@ -16,7 +16,7 @@ $funcionarios = $this->funcionarios;
 $responsavel = $this->responsavel;
 ?>
 
-<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('gerenciar/editempresasave') . '/' . $empresa->id) ?>">
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id) ?>">
     <div class="form-group">
         <label for="nome">Nome:
         </label>
@@ -39,7 +39,7 @@ $responsavel = $this->responsavel;
 
     &nbsp;&nbsp;&nbsp;
     <button class="btn btn-warning">
-        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/empresas')); ?>" style="color: white" >
+        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/listarempresas')); ?>" style="color: white" >
             Voltar       
         </a>
     </button>

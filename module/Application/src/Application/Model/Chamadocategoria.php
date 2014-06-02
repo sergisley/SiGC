@@ -2,19 +2,17 @@
 
 namespace Application\Model;
  
-class Chamado_categoria
+class Chamadocategoria
 {
     public $id;
-    public $descricao;    
-    public $empresa_id;
+    public $descricao;   
+   
  
     public function exchangeArray($data)
     {
     $this->id                       = (!empty($data['id'])) ? $data['id'] : null;
     $this->descricao                = (!empty($data['descricao'])) ? $data['descricao'] : null;
-    $this->empresa_id               = (!empty($data['empresa_id'])) ? $data['empresa_id'] : null;
     
-        
  
     }
 }

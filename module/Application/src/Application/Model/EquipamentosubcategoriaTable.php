@@ -9,7 +9,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway\TableGateway;
 
-class Equipamento_subcategoriaTable {
+class EquipamentosubcategoriaTable {
 
     protected $tableGateway;
 
@@ -20,13 +20,13 @@ class Equipamento_subcategoriaTable {
      */
     public function __construct(Adapter $adapter) {
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Equipamento_subcategoria());
+        $resultSetPrototype->setArrayObjectPrototype(new Equipamentosubcategoria());
 
-        $this->tableGateway = new TableGateway('equipamento_subcategoria', $adapter, null, $resultSetPrototype);
+        $this->tableGateway = new TableGateway('equipamentosubcategoria', $adapter, null, $resultSetPrototype);
     }
 
     /**
-     * Recuperar todos os elementos da tabela equipamento_subcategoria
+     * Recuperar todos os elementos da tabela equipamentosubcategoria
      * 
      * @return ResultSet
      */
@@ -38,10 +38,10 @@ class Equipamento_subcategoriaTable {
     }
 
     /**
-     * Localizar linha especifico pelo id da tabela equipamento_subcategoria
+     * Localizar linha especifico pelo id da tabela equipamentosubcategoria
      * 
      * @param type $id
-     * @return \Model\Equipamento_subcategoria
+     * @return \Model\Equipamentosubcategoria
      * @throws \Exception
      */
     public function find($id) {
@@ -49,30 +49,36 @@ class Equipamento_subcategoriaTable {
         $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
-            throw new \Exception("Não foi encontrado equipamento_subcategoria de id = {$id}");
+            throw new \Exception("Não foi encontrado equipamentosubcategoria de id = {$id}");
         }
         return $row;
     }
+    
+    
+    
+    
+    
+    
 
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
 
-    public function save(Equipamento_categoria $equipamento_categoria) {
+    public function save(Equipamentosubcategoria $equipamentosubcategoria) {
         $data = array(
-            'id' => $equipamento_categoria->id,
-            'empresa_id' => $equipamento_categoria->empresa_id,
-            'descricao' => $equipamento_categoria->descricao,
+            'id' => $equipamentosubcategoria->id,
+            'descricao' => $equipamentosubcategoria->descricao,
+            'equipamento_categoria_id' => $equipamentosubcategoria->equipamento_categoria_id,
         );
 
-        $id = (int) $equipamento_categoria->id;
+        $id = (int) $equipamentosubcategoria->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
             if ($this->find($id)) {
                 $this->tableGateway->update($data, array('id' => $id));
             } else {
-                throw new \Exception('Categoria de Equipamento não encontrada');
+                throw new \Exception('Subcategoria de Equipamento não encontrada');
             }
         }
     }

@@ -11,7 +11,6 @@ class Usuario
     public $telefone;
     public $perfil;
     public $setor_id;
-    public $empresa_id;
  
     public function exchangeArray($data)
     {
@@ -20,8 +19,8 @@ class Usuario
     $this->email                    = (!empty($data['email'])) ? $data['email'] : null;    
     $this->senha                    = (!empty($data['senha'])) ? $data['senha'] : null;    
     $this->telefone                 = (!empty($data['telefone'])) ? $data['telefone'] : null;
-    $this->setor_id                 = (!empty($data['setor_id'])) ? $data['setor_id'] : null;
-    $this->empresa_id               = (!empty($data['empresa_id'])) ? $data['empresa_id'] : null;
+    $this->perfil                   = (!empty($data['perfil']))  ? $data['perfil'] : null;
+    $this->setor_id                 = (!empty($data['setor_id'])) ? $data['setor_id'] : null;   
  
     }
 }

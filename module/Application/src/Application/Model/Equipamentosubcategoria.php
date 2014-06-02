@@ -2,7 +2,7 @@
 
 namespace Application\Model;
  
-class Equipamento_subcategoria
+class Equipamentosubcategoria
 {
     public $id;
     public $descricao;    

@@ -8,7 +8,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway\TableGateway;
  
-class Chamado_categoriaTable
+class ChamadocategoriaTable
 {
     protected $tableGateway;
  
@@ -20,13 +20,13 @@ class Chamado_categoriaTable
     public function __construct(Adapter $adapter)
     {
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Chamado_categoria());
+        $resultSetPrototype->setArrayObjectPrototype(new Chamadocategoria());
  
-        $this->tableGateway = new TableGateway('chamado_categoria', $adapter, null, $resultSetPrototype);
+        $this->tableGateway = new TableGateway('chamadocategoria', $adapter, null, $resultSetPrototype);
     }
  
     /**
-     * Recuperar todos os elementos da tabela chamado_categoria
+     * Recuperar todos os elementos da tabela chamadocategoria
      * 
      * @return ResultSet
      */
@@ -38,10 +38,10 @@ class Chamado_categoriaTable
     }
  
     /**
-     * Localizar linha especifico pelo id da tabela chamado_categoria
+     * Localizar linha especifico pelo id da tabela chamadocategoria
      * 
      * @param type $id
-     * @return \Model\Chamado_categoria
+     * @return \Model\Chamadocategoria
      * @throws \Exception
      */
     public function find($id)
@@ -50,7 +50,7 @@ class Chamado_categoriaTable
         $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row){
-            throw new \Exception("Não foi encontrado chamado_categoria de id = {$id}");
+            throw new \Exception("Não foi encontrado categoria de chamado de id = {$id}");
         }
         return $row;
     }
@@ -61,15 +61,15 @@ class Chamado_categoriaTable
          $this->tableGateway->delete(array('id' => (int) $id));
      }
      
-           public function save(Chamado_categoria $chamado_categoria)
+           public function save(Chamadocategoria $chamadocategoria)
      {
          $data = array(
-             'id' => $chamado_categoria->id,
-             'descricao' => $chamado_categoria->descricao,
-             'empresa_id' => $chamado_categoria->empresa_id,
+             'id' => $chamadocategoria->id,
+             'descricao' => $chamadocategoria->descricao,
+             'empresa_id' => $chamadocategoria->empresa_id,
          );
 
-         $id = (int) $chamado_categoria->id;
+         $id = (int) $chamadocategoria->id;
          if ($id == 0) {
              $this->tableGateway->insert($data);
          } else {

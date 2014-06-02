@@ -1,0 +1,102 @@
+<?php
+$title = "Chamado";
+$this->headTitle($title);
+?>
+<div class="jumbotron">
+    <h1>
+        <?php
+        echo $this->escapeHtml($title);
+        ?>
+        <small>
+            status: <font style="color:<?php
+            if ($chamado->chamado_status == 'aberto') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'em andamento') {
+                echo '#000066';
+            } elseif ($chamado->chamado_status == 'pausado') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'fechado') {
+                echo '#006600';
+            } elseif ($chamado->chamado_status == 'cancelado') {
+                echo '#660000';
+            }
+            ?>">
+                          <?php
+                          echo $this->escapeHtml($chamado->chamado_status);
+                          ?>
+            </font>
+        </small>
+    </h1>
+    <?php
+    //echo $this->escapeHtml($chamado->id);
+    ?>
+    <br>
+    <div>
+        <strong>
+            Usuário:
+        </strong>
+        <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id) ?>" style="color:black">
+            <?php
+            echo $this->escapeHtml($usuario);
+            ?>
+        </a>
+        <br>
+        <strong>
+            Técnico:
+        </strong>
+        <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id_tecnico) ?>" style="color:black">
+            <?php
+            echo $this->escapeHtml($tecnico);
+            ?>
+        </a>
+        <br>
+        <strong>
+            Categoria do Chamado:
+        </strong>
+        <?php
+        echo $this->escapeHtml($cat_chamado);
+        echo ' ';
+        echo $this->escapeHtml($sub_cat_chamado);
+        ?>
+        <br>
+        <strong>
+            Equipamento: 
+        </strong>
+        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/exibirequipamento') . '/' . $chamado->equipamento_id) ?>" style="color: black;">
+
+            <?php
+            echo $this->escapeHtml($cat_equipamento);
+            ?>
+            <?php
+            echo $this->escapeHtml($sub_cat_equipamento);
+            ?>
+            <?php
+            echo $this->escapeHtml($equipamento);
+            ?>
+        </a>
+        <br>
+        
+        
+        <a class="btn btn-warning" href="<?php echo $this->escapeHtml($this->url('chamado/editchamado') . '/' . $chamado->id) ?>">
+            Editar
+        </a>
+        &nbsp;&nbsp;
+        <a class="btn btn-success" href="<?php echo $this->escapeHtml($this->url('chamado')) ?>">
+            Voltar
+        </a>
+        <br>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Histórico
+            </div>
+            <div class="panel-body">
+                ...
+            </div>
+        </div>
+        
+
+    </div>
+
+
+</div>

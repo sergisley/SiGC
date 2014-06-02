@@ -1,46 +1,9 @@
 <?php
-$title = "Gerenciamento de Empresas";
+$title = "Gerenciamento de Setores";
 $this->headTitle($title);
 ?>
 <br>
-<?php
-if (isset($_GET["msg"])) {
-    $msg = $_GET["msg"];
 
-    if ($msg = 'empresanotfind') {
-
-        echo '<div class="alert alert-warning alert-dismissable">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  <strong>Erro!</strong> Empresa não encontrada!.
-</div>';
-    }
-}
-?>
-<script>
-
-    $(function() {
-        $('.checkbox-divida').change(function() {
-            var idDivida = $(this).prop('id');
-            var tipoDivida = $(this).prop('name');
-            var parentTR = $(this).parents('tr');
-            $.ajax('<?php  echo $this->url('usuario/nomefuncionario'); ?>', {
-                data: {id: idDivida, tipo: tipoDivida},
-                type: 'GET',
-                success: function(data) {
-                    if (data === '{"estado":1}') {
-                        parentTR.attr("class", "danger");
-                    }
-                    if (data === '{"estado":0}') {
-                        parentTR.attr("class", " ");
-                    }
-                },
-                error: function(error) {
-                    alert(error);
-                }
-            });
-        });
-    });
-</script>
 <br>
 <div class="row">
     <div class="col-lg-8">
@@ -60,14 +23,13 @@ if (isset($_GET["msg"])) {
 <br>
 <br>
 
-
 <div class="table-responsive">
     <table class="table table-hover table-striped table-responsive" style="text-align: center">
         <tr class="success">          
             <th style="text-align: center">Nome da Empresa</th>
             <th  style="text-align: center">Gerente Responsável</th>
-            <th style="text-align: center">&nbsp;</th>
-            <th style="text-align: center">&nbsp;</th> 
+            <th style="text-align: center" colspan="3">Opções</th>
+         
         </tr>
 
 <?php foreach ($empresas as $empresa) : ?>
@@ -76,19 +38,25 @@ if (isset($_GET["msg"])) {
     <?php echo $this->escapeHtml($empresa->nome); ?>
                 </td>
                 <td>
-    <?php echo $this->escapeHtml($empresa->usuario_id_responsavel); ?>
+    <?php echo $this->escapeHtml($responsaveis[$empresa->usuario_id_responsavel]); ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id); ?>" class="btn-sm btn-success">                                       
+                        Setores
+                    </a>
                 </td>
                 <td>
                     <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id); ?>" class="btn-sm btn-warning">                                       
                         Editar empresa
                     </a>
                 </td>
-                <td>
+                 <td>
                     <a href="<?php echo $this->escapeHtml($this->url('gerenciar/delempresas') . '?id=' . $empresa->id); ?>" class="btn-sm btn-danger">  
                         Excluir empresa
                     </a>
-                </td>          
-            </tr>           
+                </td> 
+            </tr>   
+            
 
 <?php endforeach; ?>
     </table>

@@ -2,7 +2,7 @@
 
 namespace Application\Model;
  
-class Equipamento_por_atributo
+class Equipamentoporatributo
 {
     public $id;
     public $valor_atributo;

@@ -9,7 +9,7 @@ use Zend\Db\Adapter\Adapter,
     Zend\Db\ResultSet\ResultSet,
     Zend\Db\TableGateway\TableGateway;
 
-class Equipamento_atributoTable {
+class EquipamentoatributoTable {
 
     protected $tableGateway;
 
@@ -20,13 +20,13 @@ class Equipamento_atributoTable {
      */
     public function __construct(Adapter $adapter) {
         $resultSetPrototype = new ResultSet();
-        $resultSetPrototype->setArrayObjectPrototype(new Equipamento_atributo());
+        $resultSetPrototype->setArrayObjectPrototype(new Equipamentoatributo());
 
-        $this->tableGateway = new TableGateway('equipamento_atributo', $adapter, null, $resultSetPrototype);
+        $this->tableGateway = new TableGateway('equipamentoatributo', $adapter, null, $resultSetPrototype);
     }
 
     /**
-     * Recuperar todos os elementos da tabela equipamento_atributo
+     * Recuperar todos os elementos da tabela equipamentoatributo
      * 
      * @return ResultSet
      */
@@ -38,10 +38,10 @@ class Equipamento_atributoTable {
     }
 
     /**
-     * Localizar linha especifico pelo id da tabela equipamento_atributo
+     * Localizar linha especifico pelo id da tabela equipamentoatributo
      * 
      * @param type $id
-     * @return \Model\Equipamento_atributo
+     * @return \Model\Equipamentoatributo
      * @throws \Exception
      */
     public function find($id) {
@@ -49,7 +49,7 @@ class Equipamento_atributoTable {
         $rowset = $this->tableGateway->select(array('id' => $id));
         $row = $rowset->current();
         if (!$row) {
-            throw new \Exception("Não foi encontrado equipamento_atributo de id = {$id}");
+            throw new \Exception("Não foi encontrado equipamentoatributo de id = {$id}");
         }
         return $row;
     }
@@ -58,14 +58,14 @@ class Equipamento_atributoTable {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
 
-    public function save(Equipamento_atributo $equipamento_atributo) {
+    public function save(Equipamentoatributo $equipamentoatributo) {
         $data = array(
-            'id' => $equipamento_atributo->id,
-            'descricao' => $equipamento_atributo->descricao,
-            'equipamento_subcategoria_id' => $equipamento_atributo->equipamento_subcategoria_id,
+            'id' => $equipamentoatributo->id,
+            'descricao' => $equipamentoatributo->descricao,
+            'equipamento_subcategoria_id' => $equipamentoatributo->equipamento_subcategoria_id,
         );
 
-        $id = (int) $equipamento_atributo->id;
+        $id = (int) $equipamentoatributo->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {

@@ -5,33 +5,33 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <br>
 <br>
-
-
-
-<table class="table">
+<table class="table table-hover">
     <tr>
-        <th>id do chamado</th>
-        <th>status do chamado</th>
-        <th>id do usuário</th>
-        <th>id da empresa</th>
-        <th>id do equipamento</th>
-        <th> id da categoria do chamado</th>
-        <th> id da subcategoria do chamado</th>
-        <th> id de usuário do técnico</th>
+        <th>Status</th>
+        <th>Usuário</th>        
+        <th>Categoria</th>
+        <th>Subcategoria</th>
+        <th>Equipamento</th>
+        <th>Técnico Responsável</th>
+        <th>&nbsp;</th>
     </tr>
-    
-<?php foreach ($chamados as $chamado) : ?>
-        <tr>
-            <td><?php echo $this->escapeHtml($chamado->id); ?></td>
+
+    <?php foreach ($chamados as $chamado) : ?>
+        <tr>           
             <td><?php echo $this->escapeHtml($chamado->chamado_status); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->usuario_id); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->empresa_id); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->equipamento_id); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->chamado_categoria_id); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->chamado_subcategoria_id); ?></td>
-            <td><?php echo $this->escapeHtml($chamado->usuario_id_tecnico); ?></td>            
+            <td><?php echo $this->escapeHtml($usuarios[$chamado->usuario_id]); ?></td>            
+            <td> <?php echo $this->escapeHtml($categoriachamados[$chamado->chamado_subcategoria_id]); ?></td>
+            <td><?php echo $this->escapeHtml($subcategoriachamados[$chamado->chamado_subcategoria_id]); ?></td>
+            <td><?php echo $this->escapeHtml($equipamentos[$chamado->equipamento_id]); ?></td>
+            <td><?php echo $this->escapeHtml($tecnicos[$chamado->usuario_id_tecnico]); ?></td>            
+            <td>
+                <a href="<?php echo $this->escapeHtml($this->url('chamado/exibirchamado') . '/' . $chamado->id); ?>" class="btn-sm btn-warning">                                       
+                    Exibir Chamado
+                </a>
+            </td>
+
         </tr>
-<?php endforeach; ?>
+    <?php endforeach; ?>
 </table>
 <br>
 <br>

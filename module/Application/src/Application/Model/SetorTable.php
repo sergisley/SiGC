@@ -21,7 +21,6 @@ class SetorTable {
     public function __construct(Adapter $adapter) {
         $resultSetPrototype = new ResultSet();
         $resultSetPrototype->setArrayObjectPrototype(new Setor());
-
         $this->tableGateway = new TableGateway('setor', $adapter, null, $resultSetPrototype);
     }
 
@@ -61,8 +60,7 @@ class SetorTable {
     public function save(Setor $setor) {
         $data = array(
             'id' => $setor->id,
-            'nome' => $setor->nome,
-            'empresa_id' => $setor->empresa_id,
+            'nome' => $setor->nome,           
         );
 
         $id = (int) $setor->id;

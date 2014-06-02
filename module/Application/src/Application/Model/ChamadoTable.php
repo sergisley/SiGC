@@ -63,7 +63,6 @@ class ChamadoTable {
             'id' => $chamado->id,
             'chamado_status' => $chamado->chamado_status,
             'usuario_id' => $chamado->usuario_id,
-            'empresa_id' => $chamado->empresa_id,
             'equipamento_id' => $chamado->equipamento_id,
             'chamado_categoria_id' => $chamado->chamado_categoria_id,
             'chamado_subcategoria_id' => $chamado->chamado_subcategoria_id,

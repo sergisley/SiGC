@@ -1,0 +1,74 @@
+<?php
+$title = "Gerenciamento de Empresas";
+$this->headTitle($title);
+?>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-8">
+        <h1>
+<?php echo $this->escapeHtml($title); ?>        
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3" style="position:absolute;
+         right:0px;">
+        <a href="<?php echo $this->escapeHtml($this->url('gerenciar/addempresas')) ?>" class="btn-sm btn-primary">
+            Adicionar Empresas
+        </a>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-responsive" style="text-align: center">
+        <tr class="success">          
+            <th style="text-align: center">Nome da Empresa</th>
+            <th  style="text-align: center">Gerente Responsável</th>
+            <th style="text-align: center" colspan="3">Opções</th>
+         
+        </tr>
+
+<?php foreach ($empresas as $empresa) : ?>
+            <tr>                
+                <td>
+    <?php echo $this->escapeHtml($empresa->nome); ?>
+                </td>
+                <td>
+    <?php echo $this->escapeHtml($responsaveis[$empresa->usuario_id_responsavel]); ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id); ?>" class="btn-sm btn-success">                                       
+                        Setores
+                    </a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/editempresas') . '/' . $empresa->id); ?>" class="btn-sm btn-warning">                                       
+                        Editar empresa
+                    </a>
+                </td>
+                 <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('gerenciar/delempresas') . '?id=' . $empresa->id); ?>" class="btn-sm btn-danger">  
+                        Excluir empresa
+                    </a>
+                </td> 
+            </tr>   
+            
+
+<?php endforeach; ?>
+    </table>
+</div>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

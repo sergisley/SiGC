@@ -12,13 +12,16 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-//imports para Empresa
+//imports para entidade Empresa
 use Application\Model\EmpresaTable as EmpresaDAO;
 use Application\Model\Empresa;
 use Application\Form\EmpresaForm;
-
+//import para entidade Usuário
 use Application\Model\UsuarioTable as UsuarioDAO;
 use Application\Model\Usuario;
+//import para entidade Setor
+use Application\Model\SetorTable as SetorDAO;
+use Application\Model\Setor;
 
 class GerenciarController extends AbstractActionController {
 
@@ -49,11 +52,11 @@ class GerenciarController extends AbstractActionController {
         return new ViewModel();
     }
 
-    public function empresasAction() {
+    public function listarempresasAction() {
 
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
-         $usuario_dao = new UsuarioDAO($adapter);
+        $usuario_dao = new UsuarioDAO($adapter);
 
         try {
             $empresas = $empresa_dao->fetchAll();
@@ -61,9 +64,25 @@ class GerenciarController extends AbstractActionController {
             $this->flashMessenger()->addErrorMessage($ex->getMessage());
             echo 'erro bd';
         }
-       
-        
-        return new ViewModel(array('empresas' => $empresas));
+        $empresas->buffer();
+        $empresasF = $empresas;
+
+        $funcionarios = array();
+        foreach ($empresasF as $empresaf):
+
+            if ($empresaf->usuario_id_responsavel == 1) {
+
+                 $funcionarios[$empresaf->usuario_id_responsavel] = 'A adicionar';
+            } else {
+                $usuarioResponsavel = $usuario_dao->find($empresaf->usuario_id_responsavel);
+
+                $funcionarios[$empresaf->usuario_id_responsavel] = $usuarioResponsavel->nome;
+            }
+        endforeach;
+
+
+        return new ViewModel(array('empresas' => $empresas,
+            'responsaveis' => $funcionarios));
     }
 
     public function addempresasAction() {
@@ -71,24 +90,21 @@ class GerenciarController extends AbstractActionController {
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
 
-        $form = new EmpresaForm();
-        $form->get('submit')->setValue('Adicionar');
+
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $nome = $request->getPost('nome');
+            $usuario_id_responsavel = $request->getPost('usuario_id_responsavel');
+
             $empresa = new Empresa();
-            $form->setInputFilter($empresa->getInputFilter());
-            $form->setData($request->getPost());
 
-            if ($form->isValid()) {
-                $empresa->exchangeArray($form->getData());
-                $empresa_dao->save($empresa);
+            $empresa->id = 0;
+            $empresa->nome = $nome;
+            $empresa->usuario_id_responsavel = $usuario_id_responsavel;
 
-                // redirecionando para empresas
-                return $this->redirect()->toRoute('gerenciar/empresas');
-            }
+            $empresa_dao->save($empresa);
         }
-        return array('form' => $form);
     }
 
     public function editempresasAction() {
@@ -96,53 +112,48 @@ class GerenciarController extends AbstractActionController {
         $adapter = $this->getServiceLocator()->get('AdapterDb');
         $empresa_dao = new EmpresaDAO($adapter);
         $usuario_dao = new UsuarioDAO($adapter);
-        
-          $id = (int) $this->params()->fromRoute('id', 0);
-  
+
+        $id = (int) $this->params()->fromRoute('id', 0);
+
 
         try {
             $empresa = $empresa_dao->find($id);
         } catch (\Exception $ex) {
-             return $this->redirect()->toRoute('gerenciar/empresas');
+            return $this->redirect()->toRoute('gerenciar/listarempresas');
         }
-        
-        $usuarioResponsavel = $usuario_dao->find($empresa->usuario_id_responsavel);
-        
-        $responsavel = $usuarioResponsavel->nome;
-        
+
+        if ($empresa->usuario_id_responsavel != 1) {
+
+            $usuarioResponsavel = $usuario_dao->find($empresa->usuario_id_responsavel);
+
+            $responsavel = $usuarioResponsavel->nome;
+        } else {
+            $responsavel = 'A adicionar';
+        }
         $funcionarios = $usuario_dao->findEmpresa($empresa->id);
 
-        return array(           
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $nome = $request->getPost('nome');
+            $usuario_id_responsavel = $request->getPost('usuario_id_responsavel');
+
+            $empresa = new Empresa();
+
+            $empresa->id = $id;
+            $empresa->nome = $nome;
+            $empresa->usuario_id_responsavel = $usuario_id_responsavel;
+
+            $empresa_dao->save($empresa);
+
+
+            return $this->redirect()->toRoute('gerenciar/listarempresas');
+        }
+        return array(
             'empresa' => $empresa,
             'responsavel' => $responsavel,
             'funcionarios' => $funcionarios,
-        ); 
+        );
     }
-    
-    public function editempresasaveAction(){
-        
-        $adapter = $this->getServiceLocator()->get('AdapterDb');
-        $empresa_dao = new EmpresaDAO($adapter);
-        
-             
-          $id = (int) $this->params()->fromRoute('id', 0);
-          
-         $nome = $this->getRequest()->getPost('nome');
-         $usuario_id_responsavel = $this->getRequest()->getPost('usuario_id_responsavel');
-        
-         $empresa = new Empresa();
-          
-         $empresa->id = $id;
-         $empresa->nome = $nome;
-         $empresa->usuario_id_responsavel = $usuario_id_responsavel;
-         
-                $empresa_dao->save($empresa);
-
-                
-          return $this->redirect()->toRoute('gerenciar/empresas');           
-        
-    }
-    
 
     public function delempresasAction() {
         $adapter = $this->getServiceLocator()->get('AdapterDb');
@@ -151,8 +162,7 @@ class GerenciarController extends AbstractActionController {
         if (isset($_GET["id"])) {
             $id = $_GET["id"];
         } else {
-            return $this->redirect()->toRoute('gerenciar/empresas');
-            //  ($this->url('gerenciar/empresas') . '?msg=empresanotfind')
+            return $this->redirect()->toRoute('gerenciar/listarempresas');
         }
 
         $request = $this->getRequest();
@@ -165,7 +175,7 @@ class GerenciarController extends AbstractActionController {
             }
 
             // Redirect to list of empresas
-            return $this->redirect()->toRoute('gerenciar/empresas');
+            return $this->redirect()->toRoute('gerenciar/listarempresas');
         }
 
         return array(
@@ -173,6 +183,44 @@ class GerenciarController extends AbstractActionController {
             'empresa' => $empresa_dao->find($id)
         );
     }
+    
+    /*
+    public function listarsetores(){
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $setor_dao = new SetorDAO($adapter);
+      
+
+        try {
+            $setores = $setor_dao->fetchAll();
+        } catch (\Exception $ex) {
+            $this->flashMessenger()->addErrorMessage($ex->getMessage());
+            echo 'erro bd';
+        }
+       
+        return new ViewModel(array('setores' => $setores));
+    }
+    */
+    
+    public function addsetores(){
+          return new ViewModel();
+    }
+    
+    public function delsetores(){
+          return new ViewModel();
+    }
+    
+    public function editsetores(){
+          return new ViewModel();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 

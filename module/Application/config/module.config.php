@@ -46,76 +46,64 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'catequipamentos' => array(
+                    'listarsetores' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/catequipamentos',
+                            'route' => '/listarsetores',
                             'defaults' => array(
-                                'action' => 'catequipamentos'
+                                'action' => 'listarsetores'
                             )
                         )
                     ),
-                    'empresas' => array(
+                    'addsetores' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/empresas',
+                            'route' => '/addsetores',
                             'defaults' => array(
-                                'action' => 'empresas'
+                                'action' => 'addsetores'
                             )
                         )
                     ),
-                    'addempresas' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/addempresas',
-                            'defaults' => array(
-                                'action' => 'addempresas'
-                            )
-                        )
-                    ),
-                    'editempresas' => array(
+                    'editsetores' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/editempresas[/:id]',
+                            'route' => '/editsetores[/:id]',
                             'constraints' => array(
                                 'Id' => '[0-9]+',
                             ),
                             'defaults' => array(
-                                'action' => 'editempresas'
+                                'action' => 'editsetores'
                             )
                         )
                     ),
-                    'editempresasave' => array(
+                    'delsetores' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/editempresasave[/:id]',
+                            'route' => '/delsetores[/:id]',
                             'constraints' => array(
                                 'Id' => '[0-9]+',
                             ),
                             'defaults' => array(
-                                'action' => 'editempresasave'
+                                'action' => 'delsetores'
                             )
                         )
                     ),
+                    'exibirequipamento' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/exibirequipamento[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'exibirequipamento'
+                            )
+                        )
+                    ),                    
+                   
                     
-                    'delempresas' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/delempresas',
-                            'defaults' => array(
-                                'action' => 'delempresas'
-                            )
-                        )
-                    ),
-                    'catchamados' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/catchamados',
-                            'defaults' => array(
-                                'action' => 'catchamados'
-                            )
-                        )
-                    ),
+                    
+                    
                 ),
             ),
             #rota para o controller usuario
@@ -131,12 +119,15 @@ return array(
                 'may_terminate' => true,
                 'child_routes' => array(
                     #rota literal para action de EXEMPLO
-                    'nomefuncionario' => array(
+                    'exibirusuario' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/nomefuncionario',
+                            'route' => '/exibirusuario[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
                             'defaults' => array(
-                                'action' => 'nomefuncionario'
+                                'action' => 'exibirusuario'
                             )
                         )
                     ),
@@ -154,97 +145,36 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'criarchamado' => array(
-                        'type' => 'literal',
+                    #
+                    'exibirchamado' => array(
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/criarchamado',
+                            'route' => '/exibirchamado[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
                             'defaults' => array(
-                                'action' => 'criarchamado'
+                                'action' => 'exibirchamado'
                             )
                         )
                     ),
-                    'chamadosabertos' => array(
-                        'type' => 'literal',
+                    'editchamado' => array(
+                        'type' => 'segment',
                         'options' => array(
-                            'route' => '/chamadosabertos',
+                            'route' => '/editchamado[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
                             'defaults' => array(
-                                'action' => 'chamadosabertos'
-                            )
-                        )
-                    ),
-                    'pesquisar' => array(
-                        'type' => 'literal',
-                        'options' => array(
-                            'route' => '/pesquisar',
-                            'defaults' => array(
-                                'action' => 'pesquisar'
+                                'action' => 'editchamado'
                             )
                         )
                     ),
                 ),
             ),
-        // The following is a route to simplify getting started creating
-        // new controllers and actions without needing to create a new
-        // module. Simply drop new controllers in, and you can access them
-        // using the path /application/:controller/:action
-        /*
-
-          'index' => array(
-          'type' => 'Literal',
-          'options' => array(
-          'route' => '/',
-          'defaults' => array(
-          '__NAMESPACE__' => 'Application\Controller',
-          'controller' => 'Index',
-          'action' => 'index',
-          ),
-          ),
-          'may_terminate' => true,
-          'child_routes' => array(
-          'default' => array(
-          'type' => 'Segment',
-          'options' => array(
-          'route' => '/[:controller[/:action]]',
-          'constraints' => array(
-          'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-          ),
-          'defaults' => array(
-
-          ),
-          ),
-          ),
-          ),
-          ),
-          'chamado' => array(
-          'type' => 'Literal',
-          'options' => array(
-          'route' => '/chamado',
-          'defaults' => array(
-          '__NAMESPACE__' => 'Application\Controller',
-          'controller' => 'Chamado',
-          'action' => 'index',
-          ),
-          ),
-          'may_terminate' => true,
-          'child_routes' => array(
-          'default' => array(
-          'type' => 'Segment',
-          'options' => array(
-          'route' => '/[:controller[/:action]]',
-          'constraints' => array(
-          'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-          ),
-          'defaults' => array(
-
-          ),
-          ),
-          ),
-          ),
-          ), */
         ),
     ),
+    ////////////////////////////////////////////////////////////////////////
     'service_manager' => array(
         'abstract_factories' => array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
