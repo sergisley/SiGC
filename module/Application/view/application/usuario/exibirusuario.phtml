@@ -1,0 +1,49 @@
+<?php
+$title = 'Usuário';
+$this->headTitle($title);
+?>
+<div class="jumbotron">
+    <h1>
+        <?php echo $this->escapeHtml($title); ?>
+    </h1>
+    <br>
+    <div>
+        <strong>
+            Nome:
+        </strong>
+        <?php echo $this->escapeHtml($usuario->nome); ?>
+        <br>
+        <strong>
+            Email:
+        </strong>
+        <?php echo $this->escapeHtml($usuario->email); ?>
+        <br>
+        <strong>
+            Telefone:
+        </strong>
+        <?php echo $this->escapeHtml($usuario->telefone); ?>
+        <br>
+        <strong>
+            Perfil:
+        </strong>
+        <?php echo $this->escapeHtml($usuario->perfil); ?>
+        <br>
+        <strong>
+            Setor:
+        </strong>
+        <?php echo $this->escapeHtml($setor_user); ?>
+        <br>
+    </div> 
+    <br>
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('usuario/editusuario') . '/' . $usuario->id); ?>" style="color: white" >
+            Editar      
+        </a>
+    </button>
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-success">
+        <a href="<?php echo $this->escapeHtml($this->url('chamado')); ?>" style="color: white" >
+            Voltar       
+        </a>
+    </button>
+</div>

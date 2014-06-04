@@ -1,0 +1,193 @@
+<?php
+$title = "Movimentações";
+$this->headTitle($title);
+?>
+<div class="jumbotron">
+    <h1>
+        <?php
+        echo $this->escapeHtml($title);
+        ?>
+        <small>
+            status do chamado: <font style="color:<?php
+            if ($chamado->chamado_status == 'aberto') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'em andamento') {
+                echo '#000066';
+            } elseif ($chamado->chamado_status == 'pausado') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'fechado') {
+                echo '#006600';
+            } elseif ($chamado->chamado_status == 'cancelado') {
+                echo '#660000';
+            } elseif ($chamado->chamado_status == 'reaberto') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'aceito') {
+                echo '#996600';
+            }            
+            
+            ?>">
+                                     <?php
+                                     echo $this->escapeHtml($chamado->chamado_status);
+                                     ?>
+            </font>
+        </small>
+    </h1>
+    <br>
+    <div>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <strong>
+                    Usuário:
+                </strong>
+                <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id) ?>" style="color:black">
+                    <?php
+                    echo $this->escapeHtml($usuario);
+                    ?>
+                </a>
+                <br>
+                <strong>
+                    Técnico:
+                </strong>
+                <?php
+                if ($tecnico == 'Sem Técnico') {
+                    echo $this->escapeHtml('Sem Ténico Responsável');
+                } else {
+                    ?>
+                    <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') . '/' . $chamado->usuario_id_tecnico) ?>" style="color:black">
+                        <?php
+                        echo $this->escapeHtml($tecnico);
+                        ?>
+                    </a>
+                    <?php
+                }
+                ?>
+                <br>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <strong>
+                    Categoria do Chamado:
+                </strong>
+                <?php
+                echo $this->escapeHtml($cat_chamado);
+                echo ' ';
+                echo $this->escapeHtml($sub_cat_chamado);
+                ?>
+                <br>
+                <strong>
+                    Equipamento: 
+                </strong>
+                <a href="<?php echo $this->escapeHtml($this->url('gerenciar/exibirequipamento') . '/' . $chamado->equipamento_id) ?>" style="color: black;">
+                    <?php
+                    echo $this->escapeHtml($cat_equipamento);
+                    ?>
+                    <?php
+                    echo $this->escapeHtml($sub_cat_equipamento);
+                    ?>
+                    <?php
+                    echo $this->escapeHtml($equipamento);
+                    ?>
+                </a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('chamado/movechamado')) ?>">
+
+        <div class="form-group">
+            <label for="acao">Tipo da Movimentação:
+            </label>
+            <select id="acao" name="acao" class="form-control">
+                <option value="aceito">Aceitar</option>
+                <option value="em andamento">Atualizar andamento</option>
+                <option value="pausado">Pausar</option>
+                <option value="reabertura">Reabrir</option>
+                <option value="fechamento">Fechar</option>
+                <option value="cancelamento">Cancelar</option>           
+            </select>
+        </div>
+        
+<input type="text" name="id_usuario" hidden="hidden" value="<?php echo $this->escapeHtml('4') ?>">
+
+<input type="text" name="equipamento_id" hidden="hidden" value="<?php echo $this->escapeHtml($chamado->equipamento_id) ?>">
+
+<input type="text" name="id_chamado" hidden="hidden" value="<?php echo $this->escapeHtml($chamado->id) ?>">
+        
+<div class="form-group">
+            <label for="descricao">Descrição:
+            </label>
+            <input id="nome" name="descricao" type="text" class="form-control">
+        </div>
+
+        <input type="submit" value="Salvar" class="btn btn-success">
+        &nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning">
+            <a href="<?php echo $this->escapeHtml($this->url('chamado')); ?>" style="color: white" >
+                Voltar       
+            </a>
+        </button>
+
+    </form>
+    <br>
+
+    <table class='table table-hover' style='font-size: medium;'>
+        <tr>
+            <th colspan='5'>
+                Histórico 
+            </th>
+        </tr>
+        <th>
+            Ação  
+        </th>
+        <th>
+            Descrição
+        </th>
+        <th>
+            Data e Hora
+        </th>
+        <th>
+            Usuário
+        </th>
+        <th>
+            Perfil
+        </th>
+        </tr>
+        <?php
+        foreach ($historicos as $historico):
+            ?>
+            <tr>
+                <td>
+                    <?php
+                    echo $this->escapeHtml($historico->acao);
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    echo $this->escapeHtml($historico->descricao);
+                    ?>
+                </td>                    
+                <td>
+                    <?php
+                    $dataehora = $historico->datahora;
+                    list($data, $hora) = explode(" ", $dataehora);
+                    list ($ano, $mes, $dia) = explode('-', $data);
+                    $dataf = $dia . "/" . $mes . "/" . $ano;
+                    echo $this->escapeHtml($dataf . " às " . $hora);
+                    ?>
+                </td>                    
+                <td>
+                    <?php
+                    echo $this->escapeHtml($hist_users[$historico->id]);
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    echo $this->escapeHtml($hist_perfil[$historico->id]);
+                    ?>
+                </td>
+            </tr>
+            <?php
+        endforeach;
+        ?>
+    </table>
+</div> 
+

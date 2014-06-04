@@ -1,0 +1,49 @@
+<?php
+$title = "Apagar Categoria de Chamado";
+$this->headTitle($title);
+
+?>
+<div class="jumbotron">    
+    <h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>  
+    <br>
+    
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('chamado/addcatchamados')) ?>">    
+    <strong>
+        <?php if ($subcat_chamado == 0){
+        ?>
+        Tem certeza que deseja apagar a categoria de chamado
+        <big>
+            <?php echo $this->escapeHtml($cat_chamado->descricao) ?>
+        </big>
+        ?        
+    </strong>
+    
+
+    
+    <input id="id" name="id" type="hidden" class="form-control" value="<?php echo $this->escapeHtml($cat_chamado->id) ?>"> 
+<br>
+<br>
+    <input type="submit" value="Apagar" class="btn btn-danger">
+    <?php
+    }else{
+        ?>
+      <strong>
+          Não é possível apagar essa categoria de chamado. Remova todas as subcategorias relacionadas a esta categoria primeiro.
+      </strong>
+    <br>
+    <br>
+        <?php
+    }
+    ?>
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('chamado/listarcatchamados')); ?>" style="color: white" >
+            Voltar       
+        </a>
+    </button>
+</form>
+<br>
+<br>
+</div>

@@ -1,0 +1,74 @@
+<?php
+$title = 'Editar Usuário';
+$this->headTitle($title);
+?>
+
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+<br>&nbsp;
+<br>
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('usuario/editusuario')) ?>">
+
+    <div class="form-group">
+        <label for="nome">Nome:
+        </label>
+        <input id="nome" name="nome" type="text" class="form-control" required value="<?php echo $this->escapeHtml($usuario->nome); ?>"> 
+    </div>
+
+    <input id="id" name="id" type="hidden" class="form-control" value="<?php echo $this->escapeHtml($usuario->id); ?>"> 
+    
+    <div class="form-group">
+        <label for="email">E-mail:
+        </label>
+        <input id="email" name="email" type="text" class="form-control" required value="<?php echo $this->escapeHtml($usuario->email); ?>"> 
+    </div>
+
+    <div class="form-group">
+        <label for="email">Senha:
+        </label>
+        <input id="senha" name="senha" type="password" class="form-control" required value="<?php echo $this->escapeHtml($usuario->senha); ?>"> 
+    </div>
+
+    <div class="form-group">
+        <label for="email">Telefone:
+        </label>
+        <input id="telefone" name="telefone" type="text" class="form-control" required value="<?php echo $this->escapeHtml($usuario->telefone); ?>"> 
+    </div>
+
+    <div class="form-group">
+        <label for="perfil">Perfil:
+        </label>
+        <select id="perfil" name="perfil" class="form-control">
+            <option value="<?php echo $this->escapeHtml($usuario->perfil); ?>"><?php echo $this->escapeHtml($usuario->perfil); ?></option>
+            <option value="usuário">Usuário</option> 
+            <option value="técnico">Técnico</option>  
+            <option value="Gerente">Gerente</option>  
+        </select>
+    </div>     
+
+    <div class="form-group">
+        <label for="setor_id">Setor:
+        </label>
+        <select id="setor_id" name="setor_id" class="form-control">
+            <option value="<?php echo $this->escapeHtml($usuario->setor_id); ?>"><?php echo $this->escapeHtml($setor_user); ?></option>
+            <?php
+            foreach ($setores as $setor):
+                ?>
+                <option value="<?php echo $this->escapeHtml($setor->id); ?>"><?php echo $this->escapeHtml($setor->nome); ?></option>            
+                <?php
+            endforeach;
+            ?>
+        </select>
+    </div>
+
+    <input type="submit" value="Salvar" class="btn btn-success">
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('chamado')); ?>" style="color: white" >
+            Voltar       
+        </a>
+    </button>
+</form>
+<br>
+<br>

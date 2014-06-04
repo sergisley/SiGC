@@ -53,6 +53,17 @@ class ChamadoTable {
         }
         return $row;
     }
+    
+    public function updatestatus($id,$status){
+   
+         $data = array(           
+            'chamado_status' => $status,
+             );             
+             
+              $this->tableGateway->update($data, array('id' => $id));
+        
+    }   
+    
 
     public function delete($id) {
         $this->tableGateway->delete(array('id' => (int) $id));

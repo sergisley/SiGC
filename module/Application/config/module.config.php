@@ -131,7 +131,31 @@ return array(
                             )
                         )
                     ),
+                    'addusuario' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/addusuario',
+                            'defaults' => array(
+                                'action' => 'addusuario'
+                            )
+                        )
+                    ),
+
+                     'editusuario' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/editusuario[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'action' => 'editusuario'
+                            )
+                        )
+                    ),
+                    
                 ),
+                
             ),
             #rota literal para o controller chamados 
             'chamado' => array(
@@ -158,15 +182,15 @@ return array(
                             )
                         )
                     ),
-                    'editchamado' => array(
+                    'movechamado' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route' => '/editchamado[/:id]',
+                            'route' => '/movechamado[/:id]',
                             'constraints' => array(
                                 'Id' => '[0-9]+',
                             ),
                             'defaults' => array(
-                                'action' => 'editchamado'
+                                'action' => 'movechamado'
                             )
                         )
                     ),
@@ -182,15 +206,61 @@ return array(
                             )
                         )
                     ),                    
-                    'ajaxsubcatchamado' => array(
+                    'listarcatchamados' => array(
                         'type' => 'literal',
                         'options' => array(
-                            'route' => '/ajaxsubcatchamado',
+                            'route' => '/listarcatchamados',
                             'defaults' => array(
-                                'action' => 'ajaxsubcatchamado'
+                                'action' => 'listarcatchamados'
                             )
                         )
-                    ),                    
+                    ),
+                    'editcatchamados' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/editcatchamados[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),                       
+                            'defaults' => array(
+                                'action' => 'editcatchamados'
+                            )
+                        )
+                    ),
+                    'delcatchamados' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/delcatchamados[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),                       
+                            'defaults' => array(
+                                'action' => 'delcatchamados'
+                            )
+                        )
+                    ),
+                    'addcatchamados' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/addcatchamados',                       
+                            'defaults' => array(
+                                'action' => 'addcatchamados'
+                            )
+                        )
+                    ),
+                    
+                    'listarsubcatchamados' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/listarsubcatchamados[/:id]',
+                            'constraints' => array(
+                                'Id' => '[0-9]+',
+                            ),                       
+                            'defaults' => array(
+                                'action' => 'listarsubcatchamados'
+                            )
+                        )
+                    ),  
                 ),
             ),
         ),

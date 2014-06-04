@@ -1,0 +1,46 @@
+<?php
+$title = "Listagem de Categorias de Chamados";
+$this->headTitle($title);
+?>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+<br>
+<br>
+<center>
+    <table class="table table-hover">
+        <tr>
+            <th>Descrição</th>
+            <th>&nbsp;</th> 
+            <th>&nbsp;</th> 
+            <th>
+                <a class="btn-sm btn-info" href="<?php echo $this->escapeHtml($this->url('chamado/addcatchamados')) ?>">
+                    Adicionar Categoria
+                </a>
+            </th>
+        </tr>
+        <?php foreach ($cat_chamados as $cat_chamado) : ?>
+            <tr>           
+                <td><?php echo $this->escapeHtml($cat_chamado->descricao); ?></td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('chamado/listarsubcatchamados') . '/' . $cat_chamado->id); ?>" class="btn-sm btn-success">                                       
+                        Visualizar Subcategorias
+                    </a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('chamado/editcatchamados') . '/' . $cat_chamado->id); ?>" class="btn-sm btn-primary">                                       
+                        Editar Categoria
+                    </a>
+                </td>            
+                <td>
+                    <a href="<?php echo $this->escapeHtml($this->url('chamado/delcatchamados') . '/' . $cat_chamado->id); ?>" class="btn-sm btn-warning">                                       
+                        Deletar Categoria
+                    </a>
+                </td>
+            </tr>
+            <?php
+        endforeach;
+        ?>
+    </table>
+</center>
+<br>

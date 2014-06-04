@@ -1,0 +1,32 @@
+<?php
+$title = "Edição de Categoria de Chamado";
+$this->headTitle($title);
+?>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+<br>&nbsp;
+<br>
+
+
+<form class="form" method="POST" action="<?php echo $this->escapeHtml($this->url('chamado/editcatchamados')) ?>">
+    
+    <input type="text" name="id" hidden="hidden" value="<?php echo $this->escapeHtml($cat_chamado->id) ?>">
+          
+    <div class="form-group">
+        <label for="descricao">Descrição:
+        </label>
+        <input id="nome" name="descricao" type="text" class="form-control" required="required" value="<?php echo $this->escapeHtml($cat_chamado->descricao) ?>"> 
+    </div>
+    <br>
+
+    <input type="submit" value="Salvar" class="btn btn-success">
+    &nbsp;&nbsp;&nbsp;
+    <button class="btn btn-warning">
+        <a href="<?php echo $this->escapeHtml($this->url('chamado/listarcatchamados')); ?>" style="color: white" >
+            Voltar       
+        </a>
+    </button>
+</form>
+<br>
+<br>

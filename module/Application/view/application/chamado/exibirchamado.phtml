@@ -19,6 +19,10 @@ $this->headTitle($title);
                 echo '#006600';
             } elseif ($chamado->chamado_status == 'cancelado') {
                 echo '#660000';
+            } elseif ($chamado->chamado_status == 'reaberto') {
+                echo '#996600';
+            } elseif ($chamado->chamado_status == 'aceito') {
+                echo '#996600';
             }
             ?>">
                           <?php
@@ -43,6 +47,9 @@ $this->headTitle($title);
             Técnico:
         </strong>
         <?php
+        
+          
+        
         if ($tecnico == 'Sem Técnico') {
             echo $this->escapeHtml('Sem Ténico Responsável');
         } else {
@@ -81,8 +88,8 @@ $this->headTitle($title);
         </a>
         <br>
         <br>
-        <a class="btn btn-warning" href="<?php echo $this->escapeHtml($this->url('chamado/editchamado') . '/' . $chamado->id) ?>">
-            Editar
+        <a class="btn btn-warning" href="<?php echo $this->escapeHtml($this->url('chamado/movechamado') . '/' . $chamado->id) ?>">
+            Mover
         </a>
         &nbsp;&nbsp;
         <a class="btn btn-success" href="<?php echo $this->escapeHtml($this->url('chamado')) ?>">

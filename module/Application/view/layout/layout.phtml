@@ -107,7 +107,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="<?php /* echo $this->url('gerenciar') */ ?>">
+                                    <a href="<?php  echo $this->url('usuario')  ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>
                                             &nbsp;  Usuários
@@ -134,7 +134,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="<?php /* echo $this->url('gerenciar/catchamados') */ ?>">
+                                    <a href="<?php  echo $this->url('chamado/listarcatchamados')  ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-folder-close"></span>
                                             &nbsp;   Categorias de Chamado
@@ -196,7 +196,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>                                    
-                                    <a href="<?php /* echo $this->url('usuario') */ ?>">
+                                    <a href="<?php echo $this->escapeHtml($this->url('usuario/exibirusuario') .'/4') ?>">
                                         <b>
                                             <span class="glyphicon glyphicon-user"></span>                            
                                             &nbsp; Perfil

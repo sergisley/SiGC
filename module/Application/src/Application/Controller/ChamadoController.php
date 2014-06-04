@@ -22,6 +22,7 @@ use Zend\View\Model\JsonModel;
 use Application\Model\ChamadoTable as ChamadoDAO;
 use Application\Model\Chamado;
 use Application\Model\ChamadocategoriaTable as CatchamadoDAO;
+use Application\Model\Chamadocategoria;
 use Application\Model\ChamadosubcategoriaTable as SubcatchamadoDAO;
 use Application\Model\EquipamentoTable as EquipamentoDAO;
 use Application\Model\EquipamentoatributoTable as AtrequipamentoDAO;
@@ -61,11 +62,11 @@ class ChamadoController extends AbstractActionController {
             $usuario = $usuario_dao->find($chamadoF->usuario_id);
             $usuarios[$chamadoF->usuario_id] = $usuario->nome;
 
-            if($chamadoF->usuario_id_tecnico == 0){
-                 $tecnicos[$chamadoF->usuario_id_tecnico] = 'Sem Técnico';
-            }else{
-            $tecnico = $usuario_dao->find($chamadoF->usuario_id_tecnico);
-            $tecnicos[$chamadoF->usuario_id_tecnico] = $tecnico->nome;
+            if ($chamadoF->usuario_id_tecnico == 0) {
+                $tecnicos[$chamadoF->usuario_id_tecnico] = 0;
+            } else {
+                $tecnico = $usuario_dao->find($chamadoF->usuario_id_tecnico);
+                $tecnicos[$chamadoF->usuario_id_tecnico] = $tecnico->nome;
             }
             $equipamento = $equipamento_dao->find($chamadoF->equipamento_id);
             $equipamentos[$chamadoF->equipamento_id] = $equipamento->descricao;
@@ -106,12 +107,12 @@ class ChamadoController extends AbstractActionController {
         $chamado = $chamado_dao->find($id);
 
         $chamadof = $chamado;
-        
-        if($chamadof->usuario_id_tecnico == 0){
+
+        if ($chamadof->usuario_id_tecnico == 0) {
             $tecnico = 'Sem Técnico';
-        }else{
-        $tecnicoEnt = $usuario_dao->find($chamadof->usuario_id_tecnico);
-        $tecnico = $tecnicoEnt->nome;
+        } else {
+            $tecnicoEnt = $usuario_dao->find($chamadof->usuario_id_tecnico);
+            $tecnico = $tecnicoEnt->nome;
         }
         $usuarioEnt = $usuario_dao->find($chamadof->usuario_id);
         $usuario = $usuarioEnt->nome;
@@ -125,18 +126,18 @@ class ChamadoController extends AbstractActionController {
         $sub_cat_equipamento = $sub_cat_equipamentoEnt->descricao;
         $cat_equipamentoEnt = $cat_equipamento_dao->find($sub_cat_equipamentoEnt->equipamento_categoria_id);
         $cat_equipamento = $cat_equipamentoEnt->descricao;
-        
+
         $historicos = $historico_dao->fetchbychamado($id);
-       
+
 
         $historicosf = $historicos->buffer();
-        
+
         foreach ($historicosf as $historicof):
             $hist_user_id = $usuario_dao->find($historicof->usuario_id);
-            $hist_users[$historicof->id] = $hist_user_id->nome;            
+            $hist_users[$historicof->id] = $hist_user_id->nome;
             $hist_perfil[$historicof->id] = $hist_user_id->perfil;
         endforeach;
-        
+
 
         return array(
             'chamado' => $chamado,
@@ -179,9 +180,9 @@ class ChamadoController extends AbstractActionController {
             $chamado->equipamento_id = $equipamento_id;
 
             $chamado_id = $chamado_dao->save($chamado);
-                        
-            $historico = new Historico;            
-            
+
+            $historico = new Historico;
+
             $historico->id = 0;
             $historico->descricao = $descricao;
             $historico->acao = 'abertura';
@@ -212,66 +213,229 @@ class ChamadoController extends AbstractActionController {
             );
         }
     }
-/////////////////////////////////////////////////////////////////////////////////
-    public function editchamadoAction() {
-       /* $adapter = $this->getServiceLocator()->get('AdapterDb');
-        $chamado_dao = new ChamadoDAO($adapter);
-        $historico_dao = new HistoricoDAO($adapter);        
-        $usuario_dao = new UsuarioDAO($adapter);
-        $catchamado_dao = new CatchamadoDAO($adapter);
-        
-        $id = (int) $this->params()->fromRoute('id', 0);
 
-        $chamado = $chamado_dao->find($id);
-        
-        
-        
-        
-        */
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+/////////////////////////////////////////////////////////////////////////////////
+    public function movechamadoAction() {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $chamado_dao = new ChamadoDAO($adapter);
+        $usuario_dao = new UsuarioDAO($adapter);
+        $sub_cat_chamado_dao = new SubcatchamadoDAO($adapter);
+        $cat_chamado_dao = new CatchamadoDAO($adapter);
+        $equipamento_dao = new EquipamentoDAO($adapter);
+        $cat_equipamento_dao = new CatequipamentoDAO($adapter);
+        $sub_cat_equipamento_dao = new SubcatequipamentoDAO($adapter);
+        $historico_dao = new HistoricoDAO($adapter);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $acao = $request->getPost('acao');
+            $id_usuario = $request->getPost('id_usuario');
+            $descricao = $request->getPost('descricao');
+            $equipamento_id = $request->getPost('equipamento_id');
+            $id_chamado = $request->getPost('id_chamado');
+
+            $historico = new Historico;
+
+            $historico->id = 0;
+            $historico->descricao = $descricao;
+            $historico->acao = $acao;
+            $historico->usuario_id = $id_usuario;
+            $historico->chamado_id = $id_chamado;
+            $historico->equipamento_id = $equipamento_id;
+
+            $historico_dao->save($historico);
+
+            if ($acao == 'aceito') {
+                $status_chamado = 'aceito';
+            } elseif ($acao == 'em andamento') {
+                $status_chamado = 'em andamento';
+            } elseif ($acao == 'pausado') {
+                $status_chamado = 'pausado';
+            } elseif ($acao == 'reabertura') {
+                $status_chamado = 'reaberto';
+            } elseif ($acao == 'fechamento') {
+                $status_chamado = 'fechado';
+            } elseif ($acao == 'cancelamento') {
+                $status_chamado = 'cancelado';
+            }
+
+            $chamado = $chamado_dao->updatestatus($id_chamado, $status_chamado);
+
+
+
+            return $this->redirect()->toRoute('chamado');
+        } else {
+
+            $id = (int) $this->params()->fromRoute('id', 0);
+
+            $chamado = $chamado_dao->find($id);
+
+            $chamadof = $chamado;
+
+            if ($chamadof->usuario_id_tecnico == 0) {
+                $tecnico = 'Sem Técnico';
+            } else {
+                $tecnicoEnt = $usuario_dao->find($chamadof->usuario_id_tecnico);
+                $tecnico = $tecnicoEnt->nome;
+            }
+            $usuarioEnt = $usuario_dao->find($chamadof->usuario_id);
+            $usuario = $usuarioEnt->nome;
+            $sub_cat_chamadoEnt = $sub_cat_chamado_dao->find($chamadof->chamado_subcategoria_id);
+            $sub_cat_chamado = $sub_cat_chamadoEnt->descricao;
+            $cat_chamadoEnt = $cat_chamado_dao->find($sub_cat_chamadoEnt->chamado_categoria_id);
+            $cat_chamado = $cat_chamadoEnt->descricao;
+            $equipamentoEnt = $equipamento_dao->find($chamadof->equipamento_id);
+            $equipamento = $equipamentoEnt->descricao;
+            $sub_cat_equipamentoEnt = $sub_cat_equipamento_dao->find($equipamentoEnt->equipamento_subcategoria_id);
+            $sub_cat_equipamento = $sub_cat_equipamentoEnt->descricao;
+            $cat_equipamentoEnt = $cat_equipamento_dao->find($sub_cat_equipamentoEnt->equipamento_categoria_id);
+            $cat_equipamento = $cat_equipamentoEnt->descricao;
+
+            $historicos = $historico_dao->fetchbychamado($id);
+
+
+            $historicosf = $historicos->buffer();
+
+            foreach ($historicosf as $historicof):
+                $hist_user_id = $usuario_dao->find($historicof->usuario_id);
+                $hist_users[$historicof->id] = $hist_user_id->nome;
+                $hist_perfil[$historicof->id] = $hist_user_id->perfil;
+            endforeach;
+
+
+            return array(
+                'chamado' => $chamado,
+                'tecnico' => $tecnico,
+                'usuario' => $usuario,
+                'sub_cat_chamado' => $sub_cat_chamado,
+                'cat_chamado' => $cat_chamado,
+                'equipamento' => $equipamento,
+                'cat_equipamento' => $cat_equipamento,
+                'sub_cat_equipamento' => $sub_cat_equipamento,
+                'historicos' => $historicos,
+                'hist_users' => $hist_users,
+                'hist_perfil' => $hist_perfil,
+            );
+        }
+    }
+
+/////////////////////////////////////////////////////////////////////////////////
+    /*    public function ajaxsubcatchamadoAction() {
+
+      return new JsonModel(array(
+      'nome' => 'Douglas V. Pasqua',
+      'email' => 'blablabla@bla.xyz',
+      ));
+
+      /*
+      $adapter = $this->getServiceLocator()->get('AdapterDb');
+      $subcatchamado_dao = SubcatchamadoDAO($adapter);
+
+      if (isset($_GET["id"])) {
+      $id = $_GET["id"];
+      }
+
+      $catchamado = $subcatchamado_dao->fetchbycatchamado($id);
+
+      $cat['ignorar'] = null;
+
+      foreach ($catchamado as $cat) :
+      $data[$cat->id] = $cat->descricao;
+      endforeach;
+
+      return $this->getResponse()->setContent(Json::encode($data));
+
+
+      } */
+
+
+    public function listarcatchamadosAction() {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $cat_chamado_dao = new CatchamadoDAO($adapter);
+
+        $cat_chamados = $cat_chamado_dao->fetchAll();
+
+        return array(
+            'cat_chamados' => $cat_chamados,
+        );
+    }
+
+    public function editcatchamadosAction() {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $cat_chamado_dao = new CatchamadoDAO($adapter);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $id = $request->getPost('id');
+            $descricao = $request->getPost('descricao');
+
+            $chamadocategoria = new Chamadocategoria;
+
+            $chamadocategoria->id = $id;
+            $chamadocategoria->descricao = $descricao;
+
+            $cat_chamado_dao->save($chamadocategoria);
+
+            return $this->redirect()->toRoute('chamado/listarcatchamados');
+        } else {
+            $id = (int) $this->params()->fromRoute('id', 0);
+
+            $cat_chamado = $cat_chamado_dao->find($id);
+
+            return array(
+                'cat_chamado' => $cat_chamado,
+            );
+        }
+    }
+
+    public function delcatchamadosAction() {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $cat_chamado_dao = new CatchamadoDAO($adapter);
+        $subcat_chamado_dao = new SubcatchamadoDAO($adapter);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $id = $request->getPost('id');
+
+            $cat_chamado_dao->delete($id);
+
+            return $this->redirect()->toRoute('chamado/listarcatchamados');
+        } else {
+            $id = (int) $this->params()->fromRoute('id', 0);
+
+            $cat_chamado = $cat_chamado_dao->find($id);
+            
+            $subcat_chamado = $subcat_chamado_dao->countcatchamado($id);
+
+            return array(
+                'cat_chamado' => $cat_chamado,
+                'subcat_chamado' => $subcat_chamado,
+            );
+        }
+    }
+
+    public function addcatchamadosAction() {
+        $adapter = $this->getServiceLocator()->get('AdapterDb');
+        $cat_chamado_dao = new CatchamadoDAO($adapter);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $id = $request->getPost('id');
+            $descricao = $request->getPost('descricao');
+
+            $chamadocategoria = new Chamadocategoria;
+
+            $chamadocategoria->id = $id;
+            $chamadocategoria->descricao = $descricao;
+
+            $cat_chamado_dao->save($chamadocategoria);
+
+            return $this->redirect()->toRoute('chamado/listarcatchamados');
         
     }
-/////////////////////////////////////////////////////////////////////////////////
-  /* public function ajaxsubcatchamado() {
-        
-       return new JsonModel(array(
-                'nome' => 'Douglas V. Pasqua',
-                'email' => 'blablabla@bla.xyz',
-        ));
-
-       /*
-       $adapter = $this->getServiceLocator()->get('AdapterDb');
-        $subcatchamado_dao = SubcatchamadoDAO($adapter);
-
-        if (isset($_GET["id"])) {
-            $id = $_GET["id"];
+    
         }
-
-        $catchamado = $subcatchamado_dao->fetchbycatchamado($id);
-
-        $cat['ignorar'] = null;
-
-        foreach ($catchamado as $cat) :
-            $data[$cat->id] = $cat->descricao;
-        endforeach;
-       
-        return $this->getResponse()->setContent(Json::encode($data));
-        
-        
-    }  */
-      
 
 }

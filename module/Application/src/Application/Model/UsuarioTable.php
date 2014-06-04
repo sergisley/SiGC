@@ -58,17 +58,18 @@ class UsuarioTable {
         $this->tableGateway->delete(array('id' => (int) $id));
     }
 
-    public function save(Usuario $user) {
+    public function save(Usuario $usuario) {
         $data = array(
-            'id' => $user->id,
-            'nome' => $user->nome,
-            'email' => $user->email,
-            'senha' => $user->senha,
-            'telefone' => $user->telefone,
-            'setor_id' => $user->setor_id,    
+            'id' => $usuario->id,
+            'nome' => $usuario->nome,
+            'email' => $usuario->email,
+            'senha' => $usuario->senha,
+            'telefone' => $usuario->telefone,
+            'perfil' => $usuario->perfil,
+            'setor_id' => $usuario->setor_id,    
         );
 
-        $id = (int) $user->id;
+        $id = (int) $usuario->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
         } else {
